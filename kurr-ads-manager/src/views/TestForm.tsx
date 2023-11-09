@@ -1,29 +1,40 @@
 import * as React from 'react';
-import { Context } from '../state/Context';
+import { AdContext } from '../state/AdContext';
 import { AdContextType, Banner, Ingredient } from '../types/AdTypes';
 
 //TEST FÖR BANNER
 
 const TestForm: React.FC = () => {
-  console.log('hej');
-  //const { savedBanner } = React.useContext(Context) as AdContextType;
-  const contextValue = React.useContext(Context) as AdContextType;
-  const { savedBanner } = contextValue || {};
-  console.log('savedBanner:', savedBanner);
+  //const { savedBanner } = React.useContext(AdContext) as AdContextType;
+  //const contextValue = React.useContext(AdContext) as AdContextType;
+  const contextValue = React.useContext(AdContext);
+
+  //const { savedBanner } = contextValue || {};
   const [formData, setFormData] = React.useState<Banner | NonNullable<unknown>>({});
-  console.log("formData", formData)
+
   const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
       [e.currentTarget.id]: e.currentTarget.value,
     });
   };
+
+
   const handleBanner = (e: React.FormEvent, formData: Banner | any) => {
     e.preventDefault();
-    console.log("formData", formData)
-    savedBanner(formData);
-    console.log("savedBanner", savedBanner)
+
+    console.log('contextValue:', contextValue);
+    
+
+    if (contextValue) {
+      const { banner, updateBanner } = contextValue;
+      updateBanner(formData);
+      console.log("Banner", banner)
+    }
   };
+
+
+
   return (
     <form className="Form" onSubmit={(e) => handleBanner(e, formData)}>
       <div>

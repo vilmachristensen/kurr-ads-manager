@@ -1,58 +1,31 @@
-import * as React from 'react';
-import { PropsWithChildren } from 'react';
-import { AdContextType, Banner, Ingredient } from '../types/AdTypes';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface Props {
-  foo: string;
+interface AdContextProps {
+  ad: Ad | null;
+  setAd: (ad: Ad) => void;
 }
 
-export const Context = React.createContext<AdContextType | null>(null);
+interface Ad {
+  // Define the properties of your ad here
+  title: string;
+  description: string;
+  // Add more properties as needed
+}
 
-const AdContextProvider: React.FC<PropsWithChildren<Props>> = ({ children, foo }) => {
-  const [banner, setBanner] = React.useState<Banner[]>([
-    {
-      id: 0,
-      caption: '',
-      description: '',
-      mediaUrl: '',
-      button:{
-        link: '',
-        buttonText: '',
-        buttonColor: '',
-      } 
-    }
-  ]);
-  //const [ingredient, setIngredient] = React.useState<Ingredient[]>([]);
-  const savedBanner = (currentBanner : Banner) => {
-    const newBanner: Banner = {
-      id: Math.random(),
-      caption: currentBanner.caption,
-      description: currentBanner.description,
-      mediaUrl: currentBanner.mediaUrl,
-      button:{
-        link: currentBanner.button.link,
-        buttonText: currentBanner.button.buttonText,
-        buttonColor: currentBanner.button.buttonText,
-      } 
-    };
-    setBanner([...banner, newBanner])
-  };
+const AdContext = createContext<AdContextProps | undefined>(undefined);
 
-  const updatedBanner = (id : number) => {
-    banner.filter((currentBanner : Banner) => {
-      if(currentBanner.id === id) {
-        setBanner([...banner]);
-      }
-    })
-  }
+export const AdProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [ad, setAd] = useState<Ad | null>(null);
 
-  console.log("savedBanner", savedBanner)
-
-  return (
-    <Context.Provider value={{ banner, savedBanner, updatedBanner }}>
-      {children}
-    </Context.Provider>
-  );
+  return <AdContext.Provider value={{ ad, setAd }}>{children}</AdContext.Provider>;
 };
 
-export default AdContextProvider;
+export const useAdContext = () => {
+  const context = useContext(AdContext);
+  if (!context) {
+    throw new Error('useAdContext must be used within an AdProvider');
+  }
+  console.log('Det här har satts: ', context)
+  return context;
+  
+};
