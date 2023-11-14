@@ -1,21 +1,29 @@
 import React from 'react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
-import AdForm from './views/AdForm';
+import CampaignPage from './views/CampaignPage';
 import { CampaignProvider } from './state/Context';
 import DisplayCampaignContent from './views/DisplayCampaignContent';
+import TargetGroupPage from './views/TargetGroupPage';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
-      <AdForm />
-  </StrictMode>
+    <BrowserRouter>
+      <Routes>
+        {' '}
+        <Route path="/" Component={CampaignPage} />
+      </Routes>
+      <Routes>
+        {' '}
+        <Route path="/TargetGroupPage" Component={TargetGroupPage} />
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
