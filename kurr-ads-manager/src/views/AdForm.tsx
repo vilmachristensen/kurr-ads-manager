@@ -1,21 +1,45 @@
 import React, { useState } from 'react';
 import { useCampaign } from '../state/Context';
-import { TargetGroup, Campaign, Ad } from '../types/AdTypes';
+import { TargetGroup, Campaign, Ad, Banner, Ingredient } from '../types/AdTypes';
 import { CampaignProvider } from '../state/Context';
 import DisplayCampaignContent from './DisplayCampaignContent';
-
+import { link } from 'fs';
 
 const ExampleComponent: React.FC = () => {
-  
-  const ad1: Ad = {id: 1, title: 'hej', content: 'hejsan'}
-  const targetGroup1: TargetGroup = {id: 1, toAll: true, ads: [ad1]}
-  const campaign: Campaign = {id: 1, name: 'My Campaign', targetGroups: [targetGroup1]}
-  
-  
+  const banner1: Banner = {
+    id: 1,
+    caption: '1',
+    description: '2',
+    mediaUrl: '3',
+    button: { link: '4', buttonText: '5', buttonColor: '6' },
+    adType: 'BANNER',
+  };
+  const ingredient1: Ingredient = {
+    id: 1,
+    caption: '7',
+    description: '8',
+    mediaUrl: '9',
+    dietaryPreferences: { vegetarian: true, vegan: false, dairy: false, nuts: true, gluten: false },
+    nutritionValues: '10',
+    emission: { totalFootprint: 11 },
+    weight: {gramsPerPackage: 12, gramsPerPiece: 13},
+    bgColor: '14',
+    adType: 'INGREDIENT',
+    category: '15',
+  };
+  const targetGroup1: TargetGroup = { id: 1, toAll: true, ads: [banner1, ingredient1] };
+  const campaign: Campaign = {
+    id: 1,
+    name: 'Min kampanj',
+    buyingType: { lifetime: true, daily: false },
+    price: 100,
+    startDate: new Date('2023-11-14'),
+    endDate: new Date('2023-11-20'),
+    targetGroups: [targetGroup1],
+  };
 
   return (
     <CampaignProvider campaign={campaign}>
-      {/* Your component code here */}
       <DisplayCampaignContent />
     </CampaignProvider>
   );

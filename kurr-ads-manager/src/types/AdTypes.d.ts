@@ -1,9 +1,15 @@
+// BASE OF AD
+interface BaseAd {
+  id: number;
+  caption: string;
+  description: string;
+  mediaUrl: string;
+  adType: 'BANNER' | 'INGREDIENT';
+}
+
 // BANNER
-export interface Banner {
-    id: number;
-    caption: string;
-    description: string;
-    mediaUrl: string;
+export interface Banner extends BaseAd{
+    adType: 'BANNER';
     button: Button;
   }
   
@@ -13,17 +19,14 @@ export interface Banner {
     buttonColor: string;
   }
   
-  //INGREDIENT
-  
-  export interface Ingredient {
-    id: number;
-    caption: string;
-    description: string;
+  // INGREDIENT
+  export interface Ingredient extends BaseAd {
+    adType: 'INGREDIENT';
     category: string;
     dietaryPreferences?: DietaryPreferences;
     nutritionValues?: string;
     emission?: Emission;
-    mediaUrl: string;
+    weight?: Weight;
     bgColor: string;
   }
   
@@ -39,29 +42,34 @@ export interface Banner {
     totalFootprint: number; // co2e per kg
   }
 
-  interface Ad {
-    id: number;
-    title: string;
-    content: string;
+  interface Weight {
+    gramsPerPiece: number;
+    gramsPerPackage: number;
   }
 
+  // AD
+  type Ad = Banner | Ingredient;
+
+  // TARGET GROUP
   interface TargetGroup {
     id: number;
     toAll: boolean;
     ads: Ad[];
   }
 
+  // CAMPAIGN
   export type Campaign = {
     id: number;
     name: string;
+    buyingType: BuyingType;
+    price: number;
+    startDate: Date;
+    endDate: Date;
     targetGroups: TargetGroup[];
   };
-  
-  /*
-  export type AdContextType = {
-    banner: Banner | null;
-    setBanner: (banner: Banner) => void;
-    //ingredient: Ingredient[];
-    //recipe: Recipe[]
-  };*/
+
+  interface BuyingType {
+    lifetime: boolean;
+    daily: boolean;
+  }
   
