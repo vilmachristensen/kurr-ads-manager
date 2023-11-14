@@ -1,16 +1,16 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { AdContextType, Banner } from '../types/AdTypes';
+import { Campaign } from '../types/AdTypes';
 
-const AdContext = createContext<AdContextType | undefined>(undefined);
+const CampaignContext = createContext<Campaign | undefined>(undefined);
 
-export const AdProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [banner, setBanner] = useState<Banner | null>(null);
+export const CampaignProvider: React.FC<{ campaign: Campaign; children: ReactNode }> = ({ campaign, children }) => { //kanske ta bort export?
+  //const [campaign, setCampaign] = useState<Campaign | null>(null);
 
-  return <AdContext.Provider value={{ banner, setBanner }}>{children}</AdContext.Provider>;
+  return <CampaignContext.Provider value={campaign}>{children}</CampaignContext.Provider>;
 };
 
-export const useAdContext = () => {
-  const context = useContext(AdContext);
+export const useCampaign = () => {
+  const context = useContext(CampaignContext);
   if (!context) {
     throw new Error('useAdContext must be used within an AdProvider');
   }

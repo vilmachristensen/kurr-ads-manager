@@ -1,9 +1,34 @@
 import React, { useState } from 'react';
-import { useAdContext } from '../state/Context';
+import { useCampaign } from '../state/Context';
+import { TargetGroup, Campaign, Ad } from '../types/AdTypes';
+import { CampaignProvider } from '../state/Context';
+import DisplayCampaignContent from './DisplayCampaignContent';
 
+
+const ExampleComponent: React.FC = () => {
+  
+  const ad1: Ad = {id: 1, title: 'hej', content: 'hejsan'}
+  const targetGroup1: TargetGroup = {id: 1, toAll: true, ads: [ad1]}
+  const campaign: Campaign = {id: 1, name: 'My Campaign', targetGroups: [targetGroup1]}
+  
+  
+
+  return (
+    <CampaignProvider campaign={campaign}>
+      {/* Your component code here */}
+      <DisplayCampaignContent />
+    </CampaignProvider>
+  );
+};
+
+export default ExampleComponent;
+
+/*
 const MAX_VALUE = 1000;
 
 const AdForm: React.FC = () => {
+  
+  
   const { setBanner } = useAdContext();
   const [id, setId] = useState(Math.floor(Math.random()*MAX_VALUE));
   const [caption, setCaption] = useState('');
@@ -58,4 +83,4 @@ const AdForm: React.FC = () => {
   );
 };
 
-export default AdForm;
+export default AdForm;*/

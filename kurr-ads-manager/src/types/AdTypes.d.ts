@@ -38,11 +38,30 @@ export interface Banner {
   interface Emission {
     totalFootprint: number; // co2e per kg
   }
+
+  interface Ad {
+    id: number;
+    title: string;
+    content: string;
+  }
+
+  interface TargetGroup {
+    id: number;
+    toAll: boolean;
+    ads: Ad[];
+  }
+
+  export type Campaign = {
+    id: number;
+    name: string;
+    targetGroups: TargetGroup[];
+  };
   
+  /*
   export type AdContextType = {
     banner: Banner | null;
     setBanner: (banner: Banner) => void;
     //ingredient: Ingredient[];
     //recipe: Recipe[]
-  };
+  };*/
   

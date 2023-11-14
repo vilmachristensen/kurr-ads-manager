@@ -4,19 +4,17 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import App from './views/App';
 import reportWebVitals from './reportWebVitals';
 import AdForm from './views/AdForm';
-import { AdProvider } from './state/Context';
+import { CampaignProvider } from './state/Context';
+import DisplayCampaignContent from './views/DisplayCampaignContent';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <StrictMode>
-    <AdProvider>
       <AdForm />
-    </AdProvider>
   </StrictMode>
 );
 
