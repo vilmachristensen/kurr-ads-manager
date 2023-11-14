@@ -1,23 +1,12 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { AdContextType, Banner } from '../types/AdTypes';
 
-interface AdContextProps {
-  ad: Ad | null;
-  setAd: (ad: Ad) => void;
-}
-
-interface Ad {
-  // Define the properties of your ad here
-  title: string;
-  description: string;
-  // Add more properties as needed
-}
-
-const AdContext = createContext<AdContextProps | undefined>(undefined);
+const AdContext = createContext<AdContextType | undefined>(undefined);
 
 export const AdProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [ad, setAd] = useState<Ad | null>(null);
+  const [banner, setBanner] = useState<Banner | null>(null);
 
-  return <AdContext.Provider value={{ ad, setAd }}>{children}</AdContext.Provider>;
+  return <AdContext.Provider value={{ banner, setBanner }}>{children}</AdContext.Provider>;
 };
 
 export const useAdContext = () => {

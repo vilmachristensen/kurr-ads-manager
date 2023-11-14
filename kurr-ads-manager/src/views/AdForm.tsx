@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import { useAdContext } from '../state/Context';
-//import { useNavigate } from 'react-router-dom';
+
+const MAX_VALUE = 1000;
 
 const AdForm: React.FC = () => {
-  const { setAd } = useAdContext();
-  const [title, setTitle] = useState('');
+  const { setBanner } = useAdContext();
+  const [id, setId] = useState(Math.floor(Math.random()*MAX_VALUE));
+  const [caption, setCaption] = useState('');
   const [description, setDescription] = useState('');
-  const newAd = { title, description /* add more properties as needed */ };
-  //const navigate = useNavigate();
+  const [mediaUrl, setMediaUrl] = useState('');
+  const [button, setButton] = useState({
+    link: '',
+    buttonText: '',
+    buttonColor: '',
+  }
+  );
+
+  const newBanner = { id,caption, description, mediaUrl, button };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create an ad object with the form values
-    
-    // Set the ad using the context function
-    setAd(newAd);
-    console.log('newAd', newAd)
+    setBanner(newBanner);
+    console.log('newBanner', newBanner)
   };  
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        Caption:
+        <input type="text" value={caption} onChange={(e) => setCaption(e.target.value)} />
       </label>
       <br />
       <label>
@@ -31,7 +37,22 @@ const AdForm: React.FC = () => {
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
       </label>
       <br />
-      {/* Add more form fields as needed */}
+      <label>
+        MediaURL:
+        <textarea value={mediaUrl} onChange={(e) => setMediaUrl(e.target.value)} />
+      </label>
+      <label>
+        Button link:
+        <textarea value={button.link} onChange={(e) => setButton({...button, link: e.target.value})} />
+      </label>
+      <label>
+        Button text:
+        <textarea value={button.buttonText} onChange={(e) => setButton({...button, buttonText: e.target.value})} />
+      </label>
+      <label>
+        Button color:
+        <textarea value={button.buttonColor} onChange={(e) => setButton({...button, buttonColor: e.target.value})} />
+      </label>
       <button type="submit">Create Ad</button>
     </form>
   );

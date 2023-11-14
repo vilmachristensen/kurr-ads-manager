@@ -40,8 +40,8 @@ export interface Banner {
   }
   
   export type AdContextType = {
-    banner: Banner;
-    updateBanner: (currentBanner: Banner) => void;
+    banner: Banner | null;
+    setBanner: (banner: Banner) => void;
     //ingredient: Ingredient[];
     //recipe: Recipe[]
   };
