@@ -6,23 +6,26 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
 import CampaignPage from './views/CampaignPage';
-import { CampaignProvider } from './state/Context';
+import { CampaignProvider, useCampaign } from './state/Context';
 import DisplayCampaignContent from './views/DisplayCampaignContent';
 import TargetGroupPage from './views/TargetGroupPage';
+import { Campaign } from './types/AdTypes';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {' '}
-        <Route path="/" Component={CampaignPage} />
-      </Routes>
-      <Routes>
-        {' '}
-        <Route path="/TargetGroupPage" Component={TargetGroupPage} />
-      </Routes>
-    </BrowserRouter>
+    <CampaignProvider>
+      <BrowserRouter>
+        <Routes>
+          {' '}
+          <Route path="/" Component={CampaignPage} />
+        </Routes>
+        <Routes>
+          {' '}
+          <Route path="/TargetGroupPage" Component={TargetGroupPage} />
+        </Routes>
+      </BrowserRouter>
+    </CampaignProvider>
   </StrictMode>,
 );
 

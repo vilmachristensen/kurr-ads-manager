@@ -39,7 +39,7 @@ const ExampleComponent: React.FC = () => {
   };
 
   return (
-    <CampaignProvider campaign={campaign}>
+    <CampaignProvider>
       <DisplayCampaignContent />
     </CampaignProvider>
   );

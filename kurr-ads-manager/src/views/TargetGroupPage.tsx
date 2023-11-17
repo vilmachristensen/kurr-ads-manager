@@ -1,30 +1,48 @@
 import { CampaignProvider } from '../state/Context';
-import { Banner, Ingredient } from '../types/AdTypes';
+import { TargetGroup } from '../types/AdTypes';
+import { useState } from 'react';
+import { useCampaign } from '../state/Context';
 
 const TargetGroupPage: React.FC = () => {
+  const campaign = useCampaign();
+
+  const [formTarget, setFormTarget] = useState({
+    id: 1,
+    toAll: true,
+    ads: []
+  });
+
+  campaign.setCampaign({
+    targetGroups: ({
+    id: formTarget.id,
+    toAll: formTarget.toAll,
+    ads: []
+
+    })
+ 
+  });
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('skickat!');
   };
 
-  /*
-  id: number;
-    toAll: boolean;
-    ads: Ad[];*/
-
   return (
-    <CampaignProvider campaign={camp}>
+    <CampaignProvider>
     <div>
+      <p>Kampanj information:</p>
+      <p>{campaign.campaign.name}</p>
       <form onSubmit={handleSubmit}>
         <label>
           Id:
-          <input type="text" value={1} readOnly />
+          <input type="number" value={1} readOnly onChange={(e) => setFormTarget({...formTarget, id: parseInt(e.target.value)})}/>
         </label>
         <br />
 
         <label>
           toAll:
-          <input type="text" value={} />
+          <input id="toAll" type="radio" value={'toAll'} onClick={() => setFormTarget({...formTarget, toAll: true})}/>
         </label>
         <br />
         <button type="submit">Skapa målgrupp</button>

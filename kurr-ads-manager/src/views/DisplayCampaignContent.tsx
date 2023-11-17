@@ -6,7 +6,7 @@ const DisplayCampaignContent: React.FC = () => {
 
   return (
     <div>
-      <h2>{campaign.name}</h2>
+      {/**       <h2>{campaign.name}</h2>
       {campaign.buyingType.daily ? <p>Daily</p> : <p>Lifetime</p>}
       <p>{campaign.price}</p>
       <p>{campaign.startDate.toString()}</p>
@@ -36,7 +36,8 @@ const DisplayCampaignContent: React.FC = () => {
             </div>
           ))}
         </div>
-      ))}
+      ))}*/}
+
     </div>
   );
 };
