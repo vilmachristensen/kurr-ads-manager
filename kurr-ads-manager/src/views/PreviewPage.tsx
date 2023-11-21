@@ -17,7 +17,7 @@ const PreviewPage: React.FC = () => {
           <div>
             Annonser:{' '}
             {group.ads.map((ad) => (
-              <p>
+              <div>
                 Id: {ad.id}, Caption: {ad.caption}, Description: {ad.description}, Typ: {ad.adType}
                 {ad.adType === 'BANNER' ? (
                   <div>
@@ -41,7 +41,7 @@ const PreviewPage: React.FC = () => {
                     <p>Backgroundcolor: {ad.bgColor}</p>
                   </div>
                 )}
-              </p>
+              </div>
             ))}
           </div>
         </div>
