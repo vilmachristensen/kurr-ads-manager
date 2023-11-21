@@ -12,6 +12,8 @@ import TargetGroupPage from './views/TargetGroupPage';
 import { Campaign } from './types/AdTypes';
 import AdPage from './views/AdPage';
 import PreviewPage from './views/PreviewPage';
+import Banner from './components/Banner';
+import Ingredient from './components/Ingredient';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -33,6 +35,14 @@ root.render(
         <Routes>
           {' '}
           <Route path="/PreviewPage" Component={PreviewPage} />
+        </Routes>
+        <Routes>
+          {' '}
+          <Route path="/Banner" Component={Banner} />
+        </Routes>
+        <Routes>
+          {' '}
+          <Route path="/Ingredient" Component={Ingredient} />
         </Routes>
       </BrowserRouter>
     </CampaignProvider>
