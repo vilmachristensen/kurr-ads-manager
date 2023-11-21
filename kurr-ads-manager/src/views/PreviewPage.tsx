@@ -18,13 +18,13 @@ const PreviewPage: React.FC = () => {
             Annonser:{' '}
             {group.ads.map((ad) => (
               <p>
-                Id: {ad.id}, Caption: {ad.caption}, Description: {ad.description}, MediaUrl:{' '}
-                {ad.mediaUrl}, Typ: {ad.adType}
+                Id: {ad.id}, Caption: {ad.caption}, Description: {ad.description}, Typ: {ad.adType}
                 {ad.adType === 'BANNER' ? (
                   <div>
                     <p>Button Link: {ad.button.link}</p>
                     <p>Button Text: {ad.button.buttonText}</p>
                     <p>Button Color: {ad.button.buttonColor}</p>
+                    <p>MediaUrl: {ad.mediaUrl}</p>
                   </div>
                 ) : (
                   <div>

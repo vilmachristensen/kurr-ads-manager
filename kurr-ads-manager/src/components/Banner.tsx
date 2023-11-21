@@ -11,6 +11,7 @@ const Banner: React.FC = () => {
     caption: '',
     description: '',
     mediaUrl: '',
+    media: '',
     adType: 'BANNER',
     button: { link: '', buttonText: '', buttonColor: '' },
   });
@@ -28,6 +29,7 @@ const Banner: React.FC = () => {
                   caption: formBanner.caption,
                   description: formBanner.description,
                   mediaUrl: formBanner.mediaUrl,
+                  media: 'bildadress',
                   adType: 'BANNER',
                   button: {
                     link: formBanner.button.link,

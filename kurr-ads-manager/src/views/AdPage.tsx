@@ -13,16 +13,6 @@ const AdPage: React.FC = () => {
     e.preventDefault();
   };
 
-  /*
-  const handleClick = (sts: string) => {
-    if (sts === 'banner') {
-      return <Banner />;
-    } else {
-      return <Ingredient />;
-    }
-  };
-  */
-
   return (
     <div>
       <button onClick={() => setClick('banner')}>Banner</button>
@@ -35,16 +25,3 @@ const AdPage: React.FC = () => {
 
 export default AdPage;
 
-{
-  /** 
-    <div>
-       <p>AdPage</p>
-       <p>Kampanj-namn</p>
-       <p>{campaign.campaign.name}</p>
-       <p>Målgruppsinformation:</p>
-       {campaign.campaign.targetGroups.map((group) =>
-       <p key = {group.id}>Id: {group.id}</p>
-       )}
-    </div>
-    */
-}

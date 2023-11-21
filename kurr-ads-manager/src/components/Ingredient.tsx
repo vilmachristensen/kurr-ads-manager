@@ -10,7 +10,6 @@ const Ingredient: React.FC = () => {
     id: 0,
     caption: '',
     description: '',
-    mediaUrl: '',
     adType: 'INGREDIENT',
     category: '',
     dietaryPreferences: {
@@ -24,6 +23,7 @@ const Ingredient: React.FC = () => {
     emission: { totalFootprint: 0 },
     weight: { gramsPerPiece: 0, gramsPerPackage: 0 },
     bgColor: '',
+    media: '',
   });
 
   const handleClick = () => {
@@ -38,7 +38,6 @@ const Ingredient: React.FC = () => {
                   id: formIngredient.id,
                   caption: formIngredient.caption,
                   description: formIngredient.description,
-                  mediaUrl: formIngredient.mediaUrl,
                   adType: 'INGREDIENT',
                   category: formIngredient.category,
                   dietaryPreferences: {
@@ -55,6 +54,7 @@ const Ingredient: React.FC = () => {
                     gramsPerPackage: formIngredient.weight.gramsPerPackage,
                   },
                   bgColor: formIngredient.bgColor,
+                  media: 'bildadress'
                 },
               ],
             }
@@ -65,6 +65,10 @@ const Ingredient: React.FC = () => {
     console.log('Skickat annons');
     navigate('/PreviewPage');
   };
+
+  const handleMediaUpload = () => {
+    console.log("Media uppladdning")
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,14 +109,6 @@ const Ingredient: React.FC = () => {
             />
           </label>
           <br />
-          <label>
-            MediaUrl:
-            <input
-              type="text"
-              value={formIngredient.mediaUrl}
-              onChange={(e) => setFormIngredient({ ...formIngredient, mediaUrl: e.target.value })}
-            />
-          </label>
           <br />
           <label>
             Category:
@@ -261,7 +257,10 @@ const Ingredient: React.FC = () => {
               onChange={(e) =>
                 setFormIngredient({
                   ...formIngredient,
-                  weight: { gramsPerPiece: parseInt(e.target.value) , gramsPerPackage: formIngredient.weight.gramsPerPackage},
+                  weight: {
+                    gramsPerPiece: parseInt(e.target.value),
+                    gramsPerPackage: formIngredient.weight.gramsPerPackage,
+                  },
                 })
               }
             />
@@ -275,12 +274,18 @@ const Ingredient: React.FC = () => {
               onChange={(e) =>
                 setFormIngredient({
                   ...formIngredient,
-                  weight: { gramsPerPiece: formIngredient.weight.gramsPerPiece , gramsPerPackage: parseInt(e.target.value)},
+                  weight: {
+                    gramsPerPiece: formIngredient.weight.gramsPerPiece,
+                    gramsPerPackage: parseInt(e.target.value),
+                  },
                 })
               }
             />
           </label>
           <br />
+
+          <button onClick={handleMediaUpload}>Ladda upp media</button>
+
           <label>
             Background-color:
             <input
@@ -289,7 +294,7 @@ const Ingredient: React.FC = () => {
               onChange={(e) =>
                 setFormIngredient({
                   ...formIngredient,
-                  bgColor: e.target.value
+                  bgColor: e.target.value,
                 })
               }
             />

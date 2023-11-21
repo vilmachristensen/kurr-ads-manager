@@ -3,13 +3,14 @@ interface BaseAd {
   id: number;
   caption: string;
   description: string;
-  mediaUrl: string;
   adType: 'BANNER' | 'INGREDIENT';
 }
 
 // BANNER
 export interface Banner extends BaseAd{
     adType: 'BANNER';
+    media?: string;
+    mediaUrl: string;
     button: Button;
   }
   
@@ -28,6 +29,7 @@ export interface Banner extends BaseAd{
     emission?: Emission;
     weight?: Weight;
     bgColor: string;
+    media?: string;
   }
   
   interface DietaryPreferences {
