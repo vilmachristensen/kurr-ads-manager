@@ -9,7 +9,7 @@ const CampaignPage: React.FC = () => {
 
   const [formCampaign, setFormCampaign] = useState({
     name: '',
-    buyingType: { lifetime: true, daily: false },
+    buyingType: { lifetime: false, daily: false },
     price: 0,
     startDate: new Date('2023-11-14'),
     endDate: new Date('2023-11-20'),
@@ -53,7 +53,7 @@ const CampaignPage: React.FC = () => {
           </label>
           <br />
           <label>
-            Buying type:
+            Lifetime:
             <input
               id="lifetime"
               type="radio"
@@ -65,16 +65,17 @@ const CampaignPage: React.FC = () => {
           </label>
           <br />
           <label>
-            Buying type:
+            Daily:
             <input
               id="daily"
               type="radio"
               value={'Daily'}
               onClick={() =>
-                setFormCampaign({ ...formCampaign, buyingType: { lifetime: true, daily: false } })
+                setFormCampaign({ ...formCampaign, buyingType: { lifetime: false, daily: true } })
               }
             />
           </label>
+          <br />
           <label>
             Price:
             <input
@@ -85,6 +86,7 @@ const CampaignPage: React.FC = () => {
               }
             />
           </label>
+          <br />
           <label>
             Start date:
             <input
@@ -95,6 +97,7 @@ const CampaignPage: React.FC = () => {
               }
             />
           </label>
+          <br />
           <label>
             End date:
             <input
@@ -106,10 +109,7 @@ const CampaignPage: React.FC = () => {
             />
           </label>
         </form>
-
-        <p>Hej</p>
-
-        <button type="submit" onClick={handleClick}>
+        <button type="button" onClick={handleClick}>
           Skapa kampanj
         </button>
       </div>

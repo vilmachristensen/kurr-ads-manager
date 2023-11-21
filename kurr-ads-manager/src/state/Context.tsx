@@ -21,11 +21,11 @@ export const CampaignProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [campaign, setCampaign] = useState<Campaign>({
     id: 0,
     name: '',
-    buyingType: { lifetime: true, daily: false },
+    buyingType: { lifetime: false, daily: false },
     price: 0,
     startDate: new Date('2023-11-14'),
     endDate: new Date('2023-11-20'),
-    targetGroups: {[id: 0, toAll: true, ads:[]]}
+    targetGroups: []
     
   })
 

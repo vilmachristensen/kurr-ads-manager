@@ -2,30 +2,36 @@ import { CampaignProvider } from '../state/Context';
 import { TargetGroup } from '../types/AdTypes';
 import { useState } from 'react';
 import { useCampaign } from '../state/Context';
+import { useNavigate } from 'react-router-dom';
 
 const TargetGroupPage: React.FC = () => {
+  const navigate = useNavigate();
   const campaign = useCampaign();
+  console.log('campaing', campaign)
 
   const [formTarget, setFormTarget] = useState({
     id: 1,
-    toAll: true,
+    toAll: false,
     ads: []
   });
 
-  campaign.setCampaign({
-    targetGroups: ({
-    id: formTarget.id,
-    toAll: formTarget.toAll,
-    ads: []
-
-    })
- 
-  });
-
-
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+  };
+  
+  const handleClick = () => {
+    campaign.setCampaign({
+      id: campaign.campaign.id,
+      name: campaign.campaign.name,
+      buyingType: { lifetime: campaign.campaign.buyingType.lifetime, daily: campaign.campaign.buyingType.daily },
+      price: campaign.campaign.price,
+      startDate: campaign.campaign.startDate,
+      endDate: campaign.campaign.endDate,
+      targetGroups: [{id: formTarget.id, toAll: formTarget.toAll, ads:[]}]
+    });
     console.log('skickat!');
+    navigate('/AdPage')
   };
 
   return (
@@ -36,7 +42,7 @@ const TargetGroupPage: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Id:
-          <input type="number" value={1} readOnly onChange={(e) => setFormTarget({...formTarget, id: parseInt(e.target.value)})}/>
+          <input type="number" value={formTarget.id} onChange={(e) => setFormTarget({...formTarget, id: parseInt(e.target.value)})}/>
         </label>
         <br />
 
@@ -45,7 +51,7 @@ const TargetGroupPage: React.FC = () => {
           <input id="toAll" type="radio" value={'toAll'} onClick={() => setFormTarget({...formTarget, toAll: true})}/>
         </label>
         <br />
-        <button type="submit">Skapa målgrupp</button>
+        <button type="button" onClick={handleClick}>Skapa målgrupp</button>
       </form>
       <p>Targetpage</p>
     </div>
