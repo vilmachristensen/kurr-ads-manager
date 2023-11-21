@@ -22,15 +22,9 @@ const TargetGroupPage: React.FC = () => {
   
   const handleClick = () => {
     campaign.setCampaign({
-      id: campaign.campaign.id,
-      name: campaign.campaign.name,
-      buyingType: { lifetime: campaign.campaign.buyingType.lifetime, daily: campaign.campaign.buyingType.daily },
-      price: campaign.campaign.price,
-      startDate: campaign.campaign.startDate,
-      endDate: campaign.campaign.endDate,
+      ...campaign.campaign,
       targetGroups: [{id: formTarget.id, toAll: formTarget.toAll, ads:[]}]
     });
-    console.log('skickat!');
     navigate('/AdPage')
   };
 

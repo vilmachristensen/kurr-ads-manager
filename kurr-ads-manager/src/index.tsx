@@ -11,6 +11,7 @@ import DisplayCampaignContent from './views/DisplayCampaignContent';
 import TargetGroupPage from './views/TargetGroupPage';
 import { Campaign } from './types/AdTypes';
 import AdPage from './views/AdPage';
+import PreviewPage from './views/PreviewPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -28,6 +29,10 @@ root.render(
         <Routes>
           {' '}
           <Route path="/AdPage" Component={AdPage} />
+        </Routes>
+        <Routes>
+          {' '}
+          <Route path="/PreviewPage" Component={PreviewPage} />
         </Routes>
       </BrowserRouter>
     </CampaignProvider>
