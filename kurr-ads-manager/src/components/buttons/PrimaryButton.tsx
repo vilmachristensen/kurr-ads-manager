@@ -14,7 +14,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, disabled }) => {
 
 const Primary = styled.button`
   background-color: ${(props) => (props.disabled ? Colors.grey_20 : Colors.kurr_black)};
-  color: {Colors.kurr_white};
+  color: ${Colors.kurr_white};
   border-radius: 4px;
   padding: 14px 24px 14px 24px;
   border: none;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import colors from './Colors';
 import "@fontsource/roboto";
 import "@fontsource/roboto/400.css"; 
+import "@fontsource/roboto/500.css"; 
 import "@fontsource/roboto/400-italic.css"; 
 
   const Header = styled.text`
@@ -33,10 +34,10 @@ import "@fontsource/roboto/400-italic.css";
   `;
 
   const Default_medium = styled.text`
-    color: ${colors.kurr_black};
     font-family: 'Roboto';
     font-size: 16px;
     line-space: 24px;
+    font-weight: 500;
   `;
 
   const Mini_text = styled.text`
@@ -72,8 +73,7 @@ import "@fontsource/roboto/400-italic.css";
     font-family: 'Roboto';
     font-size: 13px;
     line-space: 24px;
-    font-style: italic;
-    font-weight: 300;
+    font-weight: 500;
   `;
 
 export {Header,
