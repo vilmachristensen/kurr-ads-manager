@@ -15,7 +15,6 @@ import "@fontsource/roboto/700.css";
   `;
 
   const Default = styled.text`
-    color: ${colors.kurr_black};
     font-family: 'Roboto';
     font-size: 16px;
     line-space: 24px;
