@@ -21,9 +21,9 @@ const RadioButton: React.FC<RadioButtonProps> = ({ option1, option2 }) => {
         <StyledRadio
           type="radio"
           id="option1"
-          value={`radio-button-${option1}`}
-          onChange={handleSelected}
+          value="option1"
           name="radio"
+          onChange={handleSelected}
         />
         <Radio htmlFor="option1">
           <Default>{option1}</Default>
@@ -33,9 +33,9 @@ const RadioButton: React.FC<RadioButtonProps> = ({ option1, option2 }) => {
         <StyledRadio
           type="radio"
           id="option2"
-          value={`radio-button-${option2}`}
-          onChange={handleSelected}
+          value="option2"
           name="radio"
+          onChange={handleSelected}
         />
         <Radio htmlFor="option2">
           <Default>{option2}</Default>
