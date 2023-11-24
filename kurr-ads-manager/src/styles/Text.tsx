@@ -18,7 +18,7 @@ import "@fontsource/roboto/700.css";
     font-family: 'Roboto';
     font-size: 16px;
     line-space: 24px;
-    font-weight: 500;
+    font-weight: 400;
   `;
 
   const Default_discrete = styled.text`
