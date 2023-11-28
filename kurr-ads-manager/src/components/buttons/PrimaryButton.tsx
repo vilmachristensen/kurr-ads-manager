@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Default_medium} from '../../styles/Text';
+import { Default_medium } from '../../styles/Text';
 import Colors from '../../styles/Colors';
 
 interface PrimaryButtonProps {
@@ -10,7 +10,11 @@ interface PrimaryButtonProps {
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, disabled, onClick }) => {
-  return <Primary onClick={onClick} disabled={disabled}><Default_medium>{title}</Default_medium></Primary>;
+  return (
+    <Primary onClick={onClick} disabled={disabled}>
+      <Default_medium>{title}</Default_medium>
+    </Primary>
+  );
 };
 
 const Primary = styled.button`
@@ -19,7 +23,7 @@ const Primary = styled.button`
   border-radius: 4px;
   padding: 14px 24px 14px 24px;
   border: none;
-  &:hover{
+  &:hover {
     opacity: 0.7;
   }
 `;
