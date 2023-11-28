@@ -5,7 +5,7 @@ import Colors from '../../styles/Colors'
 
 interface SecondaryButtonProps {
     title: string;
-}
+} 
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({title}) => {
     return <Secondary><Default>{title}</Default></Secondary>;
