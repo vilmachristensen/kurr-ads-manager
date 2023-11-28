@@ -6,10 +6,11 @@ import Colors from '../../styles/Colors';
 interface PrimaryButtonProps {
   title: string;
   disabled: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, disabled }) => {
-  return <Primary disabled={disabled}><Default_medium>{title}</Default_medium></Primary>;
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, disabled, onClick }) => {
+  return <Primary onClick={onClick} disabled={disabled}><Default_medium>{title}</Default_medium></Primary>;
 };
 
 const Primary = styled.button`

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
 import { Banner, Campaign, Ingredient } from '../types/AdTypes';
 import { useNavigate } from 'react-router-dom';
+import PrimaryButton from '../components/buttons/PrimaryButton';
 
 const CampaignPage: React.FC = () => {
   const navigate = useNavigate();
@@ -109,9 +110,7 @@ const CampaignPage: React.FC = () => {
             />
           </label>
         </form>
-        <button type="button" onClick={handleClick}>
-          Skapa kampanj
-        </button>
+        <PrimaryButton title='hej' disabled={false} onClick={handleClick}/>
       </div>
     </CampaignProvider>
   );
