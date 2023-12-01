@@ -77,7 +77,6 @@ import "@fontsource/roboto/700.css";
   `;
 
   const Tertiary_text = styled.text`
-    color: ${colors.kurr_black};
     font-family: 'Roboto';
     font-size: 13px;
     line-space: 24px;

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { ChromePicker, ColorResult } from 'react-color';
-import PrimaryButton from './buttons/PrimaryButton';
+import TeritaryButton from './buttons/TertiaryButton';
 import styled from 'styled-components';
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
+import Colors from '../styles/Colors';
 
 const ColorPicker: React.FC = () => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-  const [selectedColor, setSelectedColor] = useState<string>('#ffffff');
+  const [selectedColor, setSelectedColor] = useState<string>(Colors.kurr_black);
 
   const handleClick = () => {
     setDisplayColorPicker((prevDisplay) => !prevDisplay);
@@ -17,21 +19,21 @@ const ColorPicker: React.FC = () => {
 
   const handleColor = (color: ColorResult) => {
     setSelectedColor(color.hex);
-    /*
-    let colorStr = color.hex;
-    if (color.rgb.a !== 1) {
-      colorStr = `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
-      setSelectedColor(colorStr);
-    }*/
   };
 
   return (
     <div>
-      <PrimaryButton onClick={handleClick} disabled={false} title={JSON.stringify(selectedColor)} />
+      <TeritaryButton
+        onClick={handleClick}
+        disabled={false}
+        title={selectedColor}
+        buttonSize={228}
+        icon={<SquareRoundedIcon style={{ color: selectedColor }} />}
+      />
       {displayColorPicker ? (
         <Popup>
           <Cover onClick={handleClose}></Cover>
-          <ChromePicker disableAlpha={false} color={selectedColor} onChange={handleColor} />
+          <ChromePicker disableAlpha={true} color={selectedColor} onChange={handleColor} />
         </Popup>
       ) : null}
     </div>
