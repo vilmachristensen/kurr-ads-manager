@@ -13,6 +13,7 @@ interface AdCardProps {
   adType: 'BANNER' | 'INGREDIENT' | 'RECIPE';
 }
 
+
 const AdCard: React.FC<AdCardProps> = ({ adType }) => {
   const [isClicked, setIsClicked] = useState(false);
 
@@ -20,31 +21,26 @@ const AdCard: React.FC<AdCardProps> = ({ adType }) => {
     setIsClicked(!isClicked);
   };
 
-  console.log('isClicked', isClicked);
+  const getImageAndTitle = () => {
+    switch (adType) {
+      case 'BANNER':
+        return [BannerImage, 'Banner'];
+      case 'INGREDIENT':
+        return [IngredientImage, 'Livsmedel'];
+      case 'RECIPE':
+        return [RecipeImage, 'Recept']
+      default:
+        return '';
+    }
+  };
 
-  return adType === 'BANNER' ? (
+  return (
     <GridContainer isClicked={isClicked} onClick={handleClick}>
-      <PictureArea src={BannerImage} alt="Banner" />
+      <PictureArea src={getImageAndTitle()[0]} alt={adType} />
       <ButtonArea>
-        <QuaternaryButton title="Banner" clicked={isClicked} />
+        <QuaternaryButton title={getImageAndTitle()[1]} clicked={isClicked} />
       </ButtonArea>
     </GridContainer>
-  ) : adType === 'INGREDIENT' ? (
-    <GridContainer isClicked={isClicked} onClick={handleClick}>
-    <PictureArea src={IngredientImage} alt="Ingredient" />
-    <ButtonArea>
-      <QuaternaryButton title="Livsmedel" clicked={isClicked} />
-    </ButtonArea>
-  </GridContainer>
-  ) : adType === 'RECIPE' ? (
-    <GridContainer isClicked={isClicked} onClick={handleClick}>
-    <PictureArea src={RecipeImage} alt="Recipe" />
-    <ButtonArea>
-      <QuaternaryButton title="Recept" clicked={isClicked} />
-    </ButtonArea>
-  </GridContainer>
-  ) : (
-    <p>None</p>
   );
 };
 
