@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Default_medium } from '../styles/Text';
-import Colors from '../styles/Colors';
-import TextField from '@mui/material/TextField';
-import { Box, Grid } from '@mui/material';
 import BannerImage from '../../src/assets/BannerImage.png';
 import IngredientImage from '../../src/assets/IngredientImage.png';
 import RecipeImage from '../../src/assets/RecipeImage.png';

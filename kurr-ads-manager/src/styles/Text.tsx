@@ -53,7 +53,6 @@ import "@fontsource/roboto/700.css";
   `;
 
   const Menu = styled.text`
-    color: ${colors.kurr_black};
     font-family: 'Roboto';
     font-size: 14px;
     line-space: 24px;
