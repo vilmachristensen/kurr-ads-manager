@@ -37,6 +37,14 @@ import "@fontsource/roboto/700.css";
     font-weight: 700;
   `;
 
+  const Header_bold = styled.text`
+  color: ${colors.kurr_black};
+  font-family: 'Roboto';
+  font-size: 24px;
+  line-space: 24px;
+  font-weight: 700;
+`;
+
   const Default_medium = styled.text`
     font-family: 'Roboto';
     font-size: 16px;
@@ -85,6 +93,7 @@ import "@fontsource/roboto/700.css";
 export {Header,
     Default,
     Default_bold,
+    Header_bold,
     Default_discrete,
     Default_medium,
     Mini_text,

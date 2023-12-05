@@ -1,17 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import Colors from '../../styles/Colors';
-import {Tertiary_text} from '../../styles/Text';
+import { Tertiary_text } from '../../styles/Text';
 
 interface TertiaryButtonProps {
   title: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  icon?: React.ReactNode;
   disabled: boolean;
+  width?:number;
+  height?: number;
 }
 
-const TertiaryButton: React.FC<TertiaryButtonProps> = ({ title, disabled }) => {
+const TertiaryButton: React.FC<TertiaryButtonProps> = ({ title, disabled, height, icon, onClick, width }) => {
   return (
-    <Tertiary disabled={disabled}><Tertiary_text>{title}</Tertiary_text></Tertiary>
-  )
+      <Tertiary  style={{ height: height, width: width }} onClick={onClick} disabled={disabled}>
+        {icon}<Tertiary_text>{title}</Tertiary_text>
+      </Tertiary>
+  );
 };
 
 const Tertiary = styled.button`
@@ -20,9 +26,10 @@ const Tertiary = styled.button`
   border-radius: 4px;
   padding: 7px 15px 7px 15px;
   border: 1px solid ${Colors.grey_45};
-  &:hover{
+  &:hover {
     opacity: 0.7;
   }
+  height: 100%;
 `;
 
 export default TertiaryButton;

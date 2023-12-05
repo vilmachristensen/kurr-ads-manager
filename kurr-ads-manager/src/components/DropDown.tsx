@@ -1,0 +1,92 @@
+import * as React from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Default, Tertiary_text } from '../styles/Text';
+import Colors from '../styles/Colors';
+import styled from 'styled-components';
+import TertiaryButton from './buttons/TertiaryButton';
+
+interface DropDownProps {
+  title?: string;
+  label: string;
+  width: number;
+  inHeader: boolean;
+  menuItems: string[] | number[];
+}
+
+const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inHeader }) => {
+  const [state, setState] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setState(event.target.value);
+  };
+
+  return (
+    <div style={{ width: width }}>
+      <Textstyle>
+        {inHeader === true ? <Tertiary_text>{title}</Tertiary_text> : <Default>{title}</Default>}
+      </Textstyle>
+      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.kurr_white }}>
+        <Select
+          sx={{
+            color: Colors.kurr_black,
+            '.MuiOutlinedInput-notchedOutline': {
+              borderColor: Colors.grey_45,
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: Colors.grey_45,
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: Colors.grey_45,
+            },
+            '.MuiSvgIcon-root ': {
+              fill: Colors.grey_45,
+            },
+          }}
+          value={state}
+          onChange={handleChange}
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                '& .MuiMenuItem-root.Mui-selected': {
+                  backgroundColor: Colors.grey_30,
+                },
+                '& .MuiMenuItem-root:hover': {
+                  backgroundColor: Colors.grey_25,
+                },
+              },
+            },
+          }}
+        >
+          <MenuItem disabled value="">
+            {inHeader === true ? (
+              <Tertiary_text>{label}</Tertiary_text>
+            ) : (
+              <Default>{label}</Default>
+            )}
+          </MenuItem>
+          {menuItems.map((item) => (
+            <MenuItem key={item} value={item}>
+              {inHeader === true ? (
+                <Tertiary_text>{item}</Tertiary_text>
+              ) : (
+                <Default>{item}</Default>
+              )}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
+  );
+};
+
+const Textstyle = styled.div`
+  color: ${Colors.grey_45};
+  padding-bottom: ${(props) => (props.title ? "5px" : "0px")};
+  margin-left: ${(props) => (props.title ? "8px" : "0px")};;
+`;
+
+export default DropDown;

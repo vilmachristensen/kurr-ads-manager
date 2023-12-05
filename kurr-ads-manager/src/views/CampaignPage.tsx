@@ -110,7 +110,7 @@ const CampaignPage: React.FC = () => {
             />
           </label>
         </form>
-        <PrimaryButton onClick={handleClick} title='hej' disabled={false}/>
+        <PrimaryButton onClick={handleClick} title='hej' disabled={false} inHeader={false}/>
       </div>
     </CampaignProvider>
   );
