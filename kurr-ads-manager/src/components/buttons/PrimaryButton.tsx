@@ -7,6 +7,7 @@ interface PrimaryButtonProps {
   title: string;
   disabled: boolean;
   height?: number;
+  icon?: React.ReactNode;
   inHeader: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -17,15 +18,17 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onClick,
   height,
   inHeader,
+  icon,
 }) => {
   return (
-      <Primary style={{ height: height }} onClick={onClick} disabled={disabled}>
-        {inHeader === true ? (
-          <Tertiary_text>{title}</Tertiary_text>
-        ) : (
-          <Default_medium>{title}</Default_medium>
-        )}
-      </Primary>
+    <Primary style={{ height: height }} onClick={onClick} disabled={disabled}>
+      {icon}
+      {inHeader === true ? (
+        <Tertiary_text>{title}</Tertiary_text>
+      ) : (
+        <Default_medium>{title}</Default_medium>
+      )}
+    </Primary>
   );
 };
 
@@ -38,6 +41,9 @@ const Primary = styled.button`
   &:hover {
     opacity: 0.7;
   }
+  display:flex;
+  align-items:center;
+  gap: 5px;
 `;
 
 export default PrimaryButton;

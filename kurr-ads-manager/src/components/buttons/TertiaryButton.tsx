@@ -15,7 +15,7 @@ interface TertiaryButtonProps {
 const TertiaryButton: React.FC<TertiaryButtonProps> = ({ title, disabled, height, icon, onClick, width }) => {
   return (
       <Tertiary  style={{ height: height, width: width }} onClick={onClick} disabled={disabled}>
-        {icon}<Tertiary_text>{title}</Tertiary_text>
+        {icon} <Tertiary_text>{title}</Tertiary_text>
       </Tertiary>
   );
 };
@@ -32,6 +32,7 @@ const Tertiary = styled.button`
   &:hover {
     opacity: 0.7;
   }
+  gap: 5px;
 `;
 
 export default TertiaryButton;

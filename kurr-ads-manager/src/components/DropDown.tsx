@@ -7,12 +7,17 @@ import Colors from '../styles/Colors';
 import styled from 'styled-components';
 import TertiaryButton from './buttons/TertiaryButton';
 
+type MenuItem = {
+  item: string;
+  icon?: React.ReactNode;
+};
+
 interface DropDownProps {
   title?: string;
   label: string;
   width: number;
   inHeader: boolean;
-  menuItems: string[] | number[];
+  menuItems: MenuItem[];
 }
 
 const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inHeader }) => {
@@ -27,7 +32,8 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
       <Textstyle>
         {inHeader === true ? <Tertiary_text>{title}</Tertiary_text> : <Default>{title}</Default>}
       </Textstyle>
-      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.kurr_white }}>
+     
+      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.kurr_white}}>
         <Select
           sx={{
             color: Colors.kurr_black,
@@ -61,32 +67,35 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
             },
           }}
         >
-          <MenuItem disabled value="">
+          <MenuItem style={{gap: 5}} disabled value="">
+            {menuItems[0].icon}
             {inHeader === true ? (
-              <Tertiary_text>{label}</Tertiary_text>
+              <Tertiary_text>{menuItems[0].item}</Tertiary_text>
             ) : (
-              <Default>{label}</Default>
+              <Default>{menuItems[0].item}</Default>
             )}
           </MenuItem>
           {menuItems.map((item) => (
-            <MenuItem key={item} value={item}>
+            <MenuItem style={{gap: 5}}key={item.item} value={item.item}>
+              {item.icon}
               {inHeader === true ? (
-                <Tertiary_text>{item}</Tertiary_text>
+                <Tertiary_text>{item.item}</Tertiary_text>
               ) : (
-                <Default>{item}</Default>
+                <Default>{item.item}</Default>
               )}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </div>
+      </div>
+
   );
 };
 
 const Textstyle = styled.div`
   color: ${Colors.grey_45};
-  padding-bottom: ${(props) => (props.title ? "5px" : "0px")};
-  margin-left: ${(props) => (props.title ? "8px" : "0px")};;
+  padding-bottom: ${(props) => (props.title ? '5px' : '0px')};
+  margin-left: ${(props) => (props.title ? '8px' : '0px')};
 `;
 
 export default DropDown;

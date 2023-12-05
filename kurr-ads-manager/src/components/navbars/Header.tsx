@@ -6,6 +6,12 @@ import { Header_bold } from '../../styles/Text';
 import TertiaryButton from '../buttons/TertiaryButton';
 import DropDown from '../DropDown';
 import PrimaryButton from '../buttons/PrimaryButton';
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import ElTacoTruck from '../../assets/ElTacoTruck_logo.png';
+import JavligtGott from '../../assets/Javligtgott_logo.png';
+import Vasterbotten from '../../assets/Vasterbotten_logo.png';
+import Felix from '../../assets/Felix_logo.png';
 
 const handleClick = () => {
   console.log('Clicked');
@@ -23,11 +29,30 @@ const Header: React.FC = () => {
           label={'El Taco Truck'}
           width={206}
           inHeader={true}
-          menuItems={['företag1', 'företag2', 'företag3']}
+          menuItems={[
+            { item: 'El Taco Truck', icon: <img src={ElTacoTruck} width={24} height={24} alt=""/> },
+            { item: 'Jävligt Gott', icon: <img src={JavligtGott} width={24} height={24} alt=""/> },
+            { item: 'Västerbottensost', icon: <img src={Vasterbotten} width={24} height={24} alt=""/> },
+            { item: 'Felix', icon: <img src={Felix} width={24} height={24} alt=""/> },
+          ]}
         />
-        <DropDown label={'Hjälp'} width={83} inHeader={true} menuItems={['hej', 'hej']} />
-        <TertiaryButton onClick={handleClick} height={58} title={'Bibliotek'} disabled={false} />
+        <DropDown
+          label={'Hjälp'}
+          width={83}
+          inHeader={true}
+          menuItems={[{ item: 'Hjälp' }, { item: 'Kontakt' }]}
+        />
+        <TertiaryButton
+          icon={
+            <LibraryBooksOutlinedIcon style={{ color: Colors.kurr_black, fontSize: 'large' }} />
+          }
+          onClick={handleClick}
+          height={58}
+          title={'Bibliotek'}
+          disabled={false}
+        />
         <PrimaryButton
+          icon={<Person2OutlinedIcon style={{ color: Colors.kurr_white, fontSize: 'large' }} />}
           inHeader={true}
           title={'Mitt konto'}
           height={58}
