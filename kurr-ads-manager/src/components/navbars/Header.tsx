@@ -72,6 +72,8 @@ const Logo = styled.div`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: auto auto;
+  padding-left: 5%;
+  padding-right: 5%;
 `;
 
 const Menu = styled.div`

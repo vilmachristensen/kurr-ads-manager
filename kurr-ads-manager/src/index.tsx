@@ -13,12 +13,17 @@ import AdPage from './views/AdPage';
 import PreviewPage from './views/PreviewPage';
 import Banner from './components/Banner';
 import Ingredient from './components/Ingredient';
+import Header from './components/navbars/Header';
+import VerticalNavbar from './components/navbars/VerticalNavbar';
+import Footer from './components/navbars/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
     <CampaignProvider>
       <BrowserRouter>
+      <Header/>
+      <VerticalNavbar/>
         <Routes>
           {' '}
           <Route path="/" Component={CampaignPage} />
@@ -43,6 +48,7 @@ root.render(
           {' '}
           <Route path="/Ingredient" Component={Ingredient} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </CampaignProvider>
   </StrictMode>,
