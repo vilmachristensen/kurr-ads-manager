@@ -10,6 +10,6 @@ type Story = StoryObj<typeof QuaternaryButton>;
 
 export const Test: Story = {
   args: {
-    title: 'Quaternary'
+    title: 'Quaternary',
   },
 };

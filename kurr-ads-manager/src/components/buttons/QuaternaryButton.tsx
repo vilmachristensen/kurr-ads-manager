@@ -22,6 +22,7 @@ const Quaternary = styled.div<QuaternaryButtonProps>`
   color: ${(props) => (props.clicked === true ? Colors.kurr_white : Colors.grey_45)};
   border-radius: 32px;
   padding: 7px 15px 7px 15px;
+  width: fit-content;
   border: ${(props) => (props.clicked === true ? `1px solid ${Colors.kurr_primary_piglet_peach}` : `1px solid ${Colors.grey_45}`)};
 `;
 

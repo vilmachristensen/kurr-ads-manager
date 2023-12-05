@@ -22,14 +22,16 @@ const TertiaryButton: React.FC<TertiaryButtonProps> = ({ title, disabled, height
 
 const Tertiary = styled.button`
   background-color: ${Colors.kurr_white};
+  justify-content: space-between;
   color: ${Colors.kurr_black};
   border-radius: 4px;
   padding: 7px 15px 7px 15px;
+  display:flex;
+  align-items:center;
   border: 1px solid ${Colors.grey_45};
   &:hover {
     opacity: 0.7;
   }
-  height: 100%;
 `;
 
 export default TertiaryButton;

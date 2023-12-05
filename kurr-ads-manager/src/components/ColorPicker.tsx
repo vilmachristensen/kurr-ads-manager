@@ -27,7 +27,7 @@ const ColorPicker: React.FC = () => {
         onClick={handleClick}
         disabled={false}
         title={selectedColor}
-        height={228}
+        width={228}
         icon={<SquareRoundedIcon style={{ color: selectedColor }} />}
       />
       {displayColorPicker ? (

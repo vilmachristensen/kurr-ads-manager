@@ -38,7 +38,6 @@ const Primary = styled.button`
   &:hover {
     opacity: 0.7;
   }
-  height: 100%;
 `;
 
 export default PrimaryButton;
