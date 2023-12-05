@@ -19,7 +19,7 @@ const InfoButton: React.FC<InfoButtonProps> = ({ title, onClick, description }) 
         <InfoOutlinedIcon />
       </Info>
       {isHover && (
-        <InfoBox>
+        <InfoBox onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
           <Default_medium>{title}</Default_medium>
           <Menu>{description}</Menu>
         </InfoBox>
@@ -48,7 +48,9 @@ const InfoBox = styled.div`
   border-radius: 4px;
   padding: 16px 16px;
   border: none;
-  opacity: 0.9;
+  opacity: 0.87;
+  position: relative;
+  left: 22px;
 `;
 
 export default InfoButton;
