@@ -22,6 +22,10 @@ const Footer: React.FC = () => {
 const FooterNav = styled.div`
   height: 60px;
   width: calc(100vw - 2rem);
+  position:absolute;
+  bottom: 0;
+  left: 15px;
+  justify-content: end;
 `;
 
 const FooterContent = styled.div`

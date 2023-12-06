@@ -76,6 +76,7 @@ const NavBar = styled.div`
     display: flex;  
     flex-direction: column;
     gap: 6px;
+    padding-left: 15%;
 }`;
 
 const Items = styled.div<{ active: boolean }>`

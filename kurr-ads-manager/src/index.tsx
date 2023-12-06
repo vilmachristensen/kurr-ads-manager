@@ -16,6 +16,19 @@ import Ingredient from './components/Ingredient';
 import Header from './components/navbars/Header';
 import VerticalNavbar from './components/navbars/VerticalNavbar';
 import Footer from './components/navbars/Footer';
+import styled from 'styled-components';
+import Colors from './styles/Colors';
+
+
+const Layout = styled.div`
+  display: grid;
+  grid-template-columns: 22% auto;
+}`
+
+const Content = styled.div`
+  padding-top: 3%;
+}`
+
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -23,7 +36,9 @@ root.render(
     <CampaignProvider>
       <BrowserRouter>
       <Header/>
-      <VerticalNavbar/>
+      <Layout>      
+        <VerticalNavbar/>
+        <Content>
         <Routes>
           {' '}
           <Route path="/" Component={CampaignPage} />
@@ -48,6 +63,8 @@ root.render(
           {' '}
           <Route path="/Ingredient" Component={Ingredient} />
         </Routes>
+        </Content>
+        </Layout>
         <Footer/>
       </BrowserRouter>
     </CampaignProvider>
@@ -58,3 +75,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
