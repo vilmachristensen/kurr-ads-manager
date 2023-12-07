@@ -12,7 +12,10 @@ import { useId } from 'react';
 const TargetGroupPage: React.FC = () => {
   const navigate = useNavigate();
   const campaign = useCampaign();
-  const idNumber = useId();
+  const idString = useId();
+  const idNumber = parseInt(idString.replace(/\D/g, ''));
+  console.log('Generated ID String:', idString);
+  console.log('Converted ID Number:', idNumber);
   console.log('campaing', campaign);
 
   const [formTarget, setFormTarget] = useState({
@@ -42,18 +45,18 @@ const TargetGroupPage: React.FC = () => {
           <div style={{ paddingTop: 15 }}>
             <form onSubmit={handleSubmit}>
               <RadioButton
-                onClick={() => setFormTarget({ ...formTarget, toAll: true })}
+                onSelectionChange={() => setFormTarget({ ...formTarget, toAll: true })}
                 option1="Annonsera till specifik målgrupp"
                 option2="Annonsera till alla"
               ></RadioButton>
-              <label htmlFor={idNumber}>
+              <label htmlFor={idString}>
                 Id:
                 <input
                   readOnly
-                  id={idNumber}
+                  id={idString}
                   type="text"
                   value={formTarget.id}
-                  onChange={(e) => setFormTarget({ ...formTarget, id: parseInt(e.target.value) })}
+                  onChange={(e) => setFormTarget({ ...formTarget, id: parseInt((e.target.value).replace(/\D/g, ''))})}
                 />
               </label>
               <div style={{ paddingTop: 50 }}>

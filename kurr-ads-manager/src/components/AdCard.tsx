@@ -7,10 +7,11 @@ import QuaternaryButton from './buttons/QuaternaryButton';
 
 interface AdCardProps {
   adType: 'BANNER' | 'INGREDIENT' | 'RECIPE';
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 
-const AdCard: React.FC<AdCardProps> = ({ adType }) => {
+const AdCard: React.FC<AdCardProps> = ({ adType, onClick }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {

@@ -7,6 +7,7 @@ import RadioButton from '../components/buttons/RadioButton';
 import { Header_small, Header_mini, Default } from '../styles/Text';
 import TextInputField from '../components/TextInputField';
 import styled from 'styled-components';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const CampaignPage: React.FC = () => {
   const navigate = useNavigate();
@@ -48,39 +49,52 @@ const CampaignPage: React.FC = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <FormContent>
-          <Header_small>Skapa kampanj</Header_small>
+            <Header_small>Skapa kampanj</Header_small>
             <MiniSection>
-              <Default>Namn*</Default>
+              <Default style={{ paddingBottom: 5 }}>Namn*</Default>
               <TextInputField
                 disabled={false}
                 value={formCampaign.name}
                 required={true}
                 onChange={(e) => setFormCampaign({ ...formCampaign, name: e.target.value })}
-              ></TextInputField>
+              />
             </MiniSection>
             <br />
             <Section>
               <Header_mini>Budget</Header_mini>
               <MiniSection>
-                <Default>Köptyp*</Default>
-                <RadioButton option1="Daglig" option2="Livstid" onClick={() =>
-                setFormCampaign({ ...formCampaign, buyingType: { lifetime: {option1} ? false : true, daily: {option2} ? false : true } })}/>
+                <Default style={{ paddingBottom: 18 }}>Köptyp*</Default>
+                <RadioButton
+                  option1="Daglig"
+                  option2="Livstid"
+                  onSelectionChange={(selectedOption) =>
+                    setFormCampaign({
+                      ...formCampaign,
+                      buyingType: {
+                        lifetime: selectedOption === 'option2' ? true : false,
+                        daily: selectedOption === 'option1' ? true : false,
+                      },
+                    })
+                  }
+                />
               </MiniSection>
-              <br />
-            <label>
-              Price:
-              <input
-                type="number"
-                value={formCampaign.price}
-                onChange={(e) =>
-                  setFormCampaign({ ...formCampaign, price: parseInt(e.target.value) })
-                }
-              />
-            </label>
+              <MiniSection>
+                <Default style={{ paddingBottom: 5 }}>Pris*</Default>
+                <TextInputField
+                  disabled={false}
+                  value={formCampaign.price}
+                  required={true}
+                  onChange={(e) =>
+                    setFormCampaign({ ...formCampaign, price: parseInt(e.target.value) })
+                  }
+                />
+              </MiniSection>
             </Section>
             <br />
             <Section>
-              <label>
+              <MiniSection>
+                <Default style={{ paddingBottom: 5 }}>Tidsperiod*</Default>
+                <label>
                 Start date:
                 <input
                   type="date"
@@ -101,6 +115,8 @@ const CampaignPage: React.FC = () => {
                   }
                 />
               </label>
+              </MiniSection>
+
             </Section>
           </FormContent>
         </form>
@@ -116,6 +132,7 @@ const FormContent = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
   gap: 50px;
+  width: 40%;
 `;
 
 const Section = styled.div`

@@ -6,14 +6,18 @@ import Colors from '../../styles/Colors';
 interface RadioButtonProps {
   option1: string;
   option2: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onSelectionChange: (selectedOption: string) => void;
+  //onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const RadioButton: React.FC<RadioButtonProps> = ({ option1, option2, onClick }) => {
+const RadioButton: React.FC<RadioButtonProps> = ({ option1, option2, onSelectionChange }) => {
   const [selected, setTarget] = useState<string>();
 
   const handleSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTarget(event.target.value);
+    const selectedOption = event.target.value;
+    setTarget(selectedOption);
+    onSelectionChange(selectedOption);
+
   };
 
   return (
