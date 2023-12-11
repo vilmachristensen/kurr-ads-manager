@@ -25,19 +25,12 @@ const AdPage: React.FC = () => {
             <AdCard adType="BANNER" onClick={() => setClick('banner')}></AdCard>
             <AdCard adType="INGREDIENT" onClick={() => setClick('ingredient')}></AdCard>
             <AdCard adType="RECIPE" onClick={() => setClick('recipe')}></AdCard>
-            {click === 'banner' && <Banner />}
-            {click === 'ingredient' && <Ingredient />}
-            {click === 'recipe' && <p>Sidan är inte skapad än</p>}
           </Grid>
         </Space>
-
-        {/** 
-        <button onClick={() => setClick('banner')}>Banner</button>
-        <button onClick={() => setClick('ingredient')}>Ingredient</button>
+    
         {click === 'banner' && <Banner />}
         {click === 'ingredient' && <Ingredient />}
-
-        */}
+        {click === 'recipe' && <p>Denna sida är inte skapad än!</p>}        
       </div>
     </div>
   );

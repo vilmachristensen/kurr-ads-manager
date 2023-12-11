@@ -7,7 +7,7 @@ import QuaternaryButton from './buttons/QuaternaryButton';
 
 interface AdCardProps {
   adType: 'BANNER' | 'INGREDIENT' | 'RECIPE';
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 }
 
 
@@ -16,6 +16,9 @@ const AdCard: React.FC<AdCardProps> = ({ adType, onClick }) => {
 
   const handleClick = () => {
     setIsClicked(!isClicked);
+    if (onClick) {
+      onClick();
+    }
   };
 
   const getImageAndTitle = () => {
@@ -54,7 +57,7 @@ const GridContainer = styled.div<{ isClicked: boolean }>`
 
 const PictureArea = styled.img`
   width: 100%;
-  height: auto;
+  height: 320px;
   border-radius: 5px;
   object-fit: cover;
 `;

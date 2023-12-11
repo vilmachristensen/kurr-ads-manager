@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
 import { useNavigate } from 'react-router-dom';
+import { Header_mini } from '../styles/Text';
 
 const Banner: React.FC = () => {
   const campaign = useCampaign();
@@ -53,8 +54,8 @@ const Banner: React.FC = () => {
 
   return (
     <CampaignProvider>
-      <div>
-        <p>Banner page</p>
+      <div style={{paddingTop: 50}}>
+        <Header_mini>Inställningar för banner</Header_mini>
         <form onSubmit={handleSubmit}>
           <label>
             Id:

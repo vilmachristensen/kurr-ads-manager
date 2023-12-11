@@ -7,23 +7,27 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 interface InfoButtonProps {
   title: string;
   description: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  left?: number;
 }
 
-const InfoButton: React.FC<InfoButtonProps> = ({ title, onClick, description }) => {
+const InfoButton: React.FC<InfoButtonProps> = ({ title, description, left }) => {
   const [isHover, setIsHover] = useState(false);
 
   return (
     <div>
-      <Info onClick={onClick} onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-        <InfoOutlinedIcon />
-      </Info>
       {isHover && (
-        <InfoBox onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+        <InfoBox
+          left={left}
+          onMouseOver={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+        >
           <Default_medium>{title}</Default_medium>
           <Menu>{description}</Menu>
         </InfoBox>
       )}
+      <Info onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+        <InfoOutlinedIcon />
+      </Info>
     </div>
   );
 };
@@ -49,8 +53,8 @@ const InfoBox = styled.div`
   padding: 16px 16px;
   border: none;
   opacity: 0.87;
-  position: relative;
-  left: 22px;
+  position: absolute;
+  left: ${(props) => (props.left ? `${props.left}px` : '0')};
 `;
 
 export default InfoButton;

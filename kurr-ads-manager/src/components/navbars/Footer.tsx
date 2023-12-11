@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import Colors from '../../styles/Colors';
@@ -9,7 +8,9 @@ const Footer: React.FC = () => {
     <FooterNav>
       <Line />
       <FooterContent>
-        <Default_bold style={{ color: Colors.kurr_black, fontSize: '14px' }}>KURR AB ®</Default_bold>
+        <Default_bold style={{ color: Colors.kurr_black, fontSize: '14px' }}>
+          KURR AB ®
+        </Default_bold>
         <img
           src={'https://kurr.co/static/media/pasta.ed3cedff6f23e9a7935fba8d56ee1526.svg'}
           alt="pasta"
@@ -20,18 +21,19 @@ const Footer: React.FC = () => {
 };
 
 const FooterNav = styled.div`
-  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: 80px;
   width: calc(100vw - 2rem);
-  position:absolute;
-  bottom: 0;
-  left: 15px;
-  justify-content: end;
+  padding-left: 15px;
 `;
 
 const FooterContent = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const Line = styled.div`

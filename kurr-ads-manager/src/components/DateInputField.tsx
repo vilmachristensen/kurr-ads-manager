@@ -6,13 +6,14 @@ import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers';
 
 interface DateInputFieldProps {
-    value: formCampaign.endDate.toISOString().split('T')[0]
+    //value: formCampaign.endDate.toISOString().split('T')[0]
 }
 
 const DateInputField: React.FC<DateInputFieldProps> = ({  }) => {
     const [selectedDate, setSelectedDate] = React.useState(new Date());
 
     return (
+      /*
         <DatePicker
         label="none"
         value={value}
@@ -20,6 +21,10 @@ const DateInputField: React.FC<DateInputFieldProps> = ({  }) => {
           setFormCampaign({ ...formCampaign, endDate: new Date(e.target.value) })
         }
       />
+      */
+     <div>
+      <p>DateInputField</p>
+     </div>
       );
 };
 
