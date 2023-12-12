@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, SetStateAction, Dispatch } from 'react';
-import { Campaign } from '../types/AdTypes';
+import { Campaign } from '../types/Types';
 
 interface CampaignContextType {
   campaign: Campaign;

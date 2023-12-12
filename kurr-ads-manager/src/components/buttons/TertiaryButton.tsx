@@ -21,7 +21,7 @@ const TertiaryButton: React.FC<TertiaryButtonProps> = ({ title, disabled, height
 };
 
 const Tertiary = styled.button`
-  background-color: ${Colors.kurr_white};
+  background-color: ${Colors.white};
   justify-content: space-between;
   color: ${Colors.kurr_black};
   border-radius: 4px;

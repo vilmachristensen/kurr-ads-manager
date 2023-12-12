@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
-import { Banner, Campaign, Ingredient } from '../types/AdTypes';
+import { Banner, Campaign, Ingredient } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import RadioButton from '../components/buttons/RadioButton';
@@ -66,8 +66,15 @@ const CampaignPage: React.FC = () => {
               <br />
               <Section>
                 <InfoSection>
-                <Header_mini>Budget</Header_mini>
-                <InfoButton left={10} title="Ange budget" description='Budgeten avser den summa som din kampanj kan förbruka per dag. Den kan sättas till daglig eller väljas till livstid'/>
+                  <div>
+                    <Header_mini>Budget</Header_mini>
+                  </div>
+                  <div>
+                    <InfoButton
+                      title="Ange budget"
+                      description="Budgeten avser den summa som din kampanj kan förbruka per dag. Den kan sättas till daglig eller väljas till livstid"
+                    />
+                  </div>
                 </InfoSection>
                 <MiniSection>
                   <Default style={{ paddingBottom: 18 }}>Köptyp*</Default>
@@ -100,8 +107,15 @@ const CampaignPage: React.FC = () => {
               <br />
               <Section>
                 <InfoSection>
-                <Header_mini>Tidsperiod*</Header_mini> 
-                <InfoButton left={10} title="Ange tidsperiod" description='Tidsperioden för hur länge din kampanj ska vara aktiv anges med start samt slutdatum'/>
+                  <div>
+                    <Header_mini>Tidsperiod*</Header_mini>
+                  </div>
+                  <div>
+                    <InfoButton
+                      title="Ange tidsperiod"
+                      description="Tidsperioden för hur länge din kampanj ska vara aktiv anges med start samt slutdatum"
+                    />
+                  </div>
                 </InfoSection>
                 <MiniSection>
                   <Default style={{ paddingBottom: 5 }}>Startdatum</Default>
@@ -118,7 +132,13 @@ const CampaignPage: React.FC = () => {
               </Section>
             </FormContent>
           </form>
-          <PrimaryButton onClick={handleClick} title="Nästa" disabled={false} inHeader={false} width={91} />
+          <PrimaryButton
+            onClick={handleClick}
+            title="Nästa"
+            disabled={false}
+            inHeader={false}
+            width={91}
+          />
         </Content>
       </LocalizationProvider>
     </CampaignProvider>
@@ -153,9 +173,8 @@ const MiniSection = styled.div`
   gap: 5px;
 `;
 
-
 const InfoSection = styled.div`
-  display: grid;
-  grid-template-columns: auto 90%;
-  gap: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 `;

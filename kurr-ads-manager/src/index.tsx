@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import CampaignPage from './views/CampaignPage';
 import { CampaignProvider, useCampaign } from './state/Context';
 import TargetGroupPage from './views/TargetGroupPage';
-import { Campaign } from './types/AdTypes';
+import { Campaign } from './types/Types';
 import AdPage from './views/AdPage';
 import PreviewPage from './views/PreviewPage';
 import Banner from './components/Banner';
@@ -18,54 +18,73 @@ import VerticalNavbar from './components/navbars/VerticalNavbar';
 import Footer from './components/navbars/Footer';
 import styled from 'styled-components';
 import Colors from './styles/Colors';
-
+import ConfirmationPage from './views/ConfirmationPage';
 
 const Layout = styled.div`
   display: grid;
   grid-template-columns: 22% auto;
-}`
+}`;
 
 const Content = styled.div`
   padding-top: 3%;
-}`
+}`;
 
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1; 
+`;
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
     <CampaignProvider>
       <BrowserRouter>
-      <Header/>
-      <Layout>      
-        <VerticalNavbar/>
-        <Content>
-        <Routes>
-          {' '}
-          <Route path="/" Component={CampaignPage} />
-        </Routes>
-        <Routes>
-          {' '}
-          <Route path="/TargetGroupPage" Component={TargetGroupPage} />
-        </Routes>
-        <Routes>
-          {' '}
-          <Route path="/AdPage" Component={AdPage} />
-        </Routes>
-        <Routes>
-          {' '}
-          <Route path="/PreviewPage" Component={PreviewPage} />
-        </Routes>
-        <Routes>
-          {' '}
-          <Route path="/Banner" Component={Banner} />
-        </Routes>
-        <Routes>
-          {' '}
-          <Route path="/Ingredient" Component={Ingredient} />
-        </Routes>
-        </Content>
+      <PageContainer>
+        <Header />
+        <ContentWrapper>
+        <Layout>
+          <div>
+            <VerticalNavbar />
+          </div>
+          <Content>
+            <Routes>
+              {' '}
+              <Route path="/" Component={CampaignPage} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/TargetGroupPage" Component={TargetGroupPage} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/AdPage" Component={AdPage} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/PreviewPage" Component={PreviewPage} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/ConfirmationPage" Component={ConfirmationPage} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/Banner" Component={Banner} />
+            </Routes>
+            <Routes>
+              {' '}
+              <Route path="/Ingredient" Component={Ingredient} />
+            </Routes>
+          </Content>
         </Layout>
-        <Footer/>
+        </ContentWrapper>
+        <Footer />
+        </PageContainer>
       </BrowserRouter>
     </CampaignProvider>
   </StrictMode>,
@@ -75,5 +94,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-

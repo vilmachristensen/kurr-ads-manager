@@ -18,13 +18,19 @@ interface DropDownProps {
   width: number;
   inHeader: boolean;
   menuItems: MenuItem[];
+  onChange?: (event: SelectChangeEvent) => void; // La till denna för banner komponenten
+  value?: string // La till denna för banner komponenten
 }
 
-const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inHeader }) => {
+const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inHeader, onChange, value }) => {
   const [state, setState] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
     setState(event.target.value);
+
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   return (
@@ -33,7 +39,7 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
         {inHeader === true ? <Tertiary_text>{title}</Tertiary_text> : <Default>{title}</Default>}
       </Textstyle>
      
-      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.kurr_white}}>
+      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.white}}>
         <Select
           sx={{
             color: Colors.kurr_black,
@@ -95,7 +101,7 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
 const Textstyle = styled.div`
   color: ${Colors.grey_45};
   padding-bottom: ${(props) => (props.title ? '5px' : '0px')};
-  margin-left: ${(props) => (props.title ? '8px' : '0px')};
+  margin-left: ${(props) => (props.title ? '8px' : '8px')};
 `;
 
 export default DropDown;

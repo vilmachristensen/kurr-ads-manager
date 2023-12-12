@@ -57,7 +57,7 @@ const GridContainer = styled.div<{ isClicked: boolean }>`
 
 const PictureArea = styled.img`
   width: 100%;
-  height: 320px;
+  height: 324px;
   border-radius: 5px;
   object-fit: cover;
 `;

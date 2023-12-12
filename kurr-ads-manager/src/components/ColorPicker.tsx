@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 import Colors from '../styles/Colors';
 
-const ColorPicker: React.FC = () => {
+interface ColorPickerProps {
+  onChange?: (color: { target: { value: string } }) => void; // La till denna för banner komponenten
+  value?: string; // La till denna för banner komponenten
+}
+
+const ColorPicker: React.FC<ColorPickerProps> = ({ onChange, value }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [selectedColor, setSelectedColor] = useState<string>(Colors.kurr_black);
 
@@ -19,6 +24,9 @@ const ColorPicker: React.FC = () => {
 
   const handleColor = (color: ColorResult) => {
     setSelectedColor(color.hex);
+    if (onChange) {
+      onChange({ target: { value: color.hex } });
+    }
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Colors from '../../styles/Colors';
 import { Default, Menu } from '../../styles/Text';
+import { useNavigate } from 'react-router-dom';
 
 interface NavBarProps {
   navBarNumber: number;
@@ -33,6 +34,14 @@ const VerticalNavbar: React.FC = () => {
     },
   ]);
 
+  const navigate = useNavigate();
+  const navigations = [
+    { navigation: '/' },
+    { navigation: '/TargetGroupPage' },
+    { navigation: '/AdPage' },
+    { navigation: '/PreviewPage' },
+  ];
+
   const handleNavBar = (number: number) => {
     setNavBarArray((prevArray) =>
       prevArray
@@ -44,6 +53,11 @@ const VerticalNavbar: React.FC = () => {
           navBarItem.navBarNumber <= number ? { ...navBarItem, active: true } : navBarItem,
         ),
     );
+
+    const index = number - 1;
+    if (index >= 0 && index < navigations.length) {
+      navigate(navigations[index].navigation);
+    }
   };
 
   return (
@@ -76,7 +90,8 @@ const NavBar = styled.div`
     display: flex;  
     flex-direction: column;
     gap: 6px;
-    padding-left: 15%;
+    padding-left:5%;
+    position: fixed;
 }`;
 
 const Items = styled.div<{ active: boolean }>`

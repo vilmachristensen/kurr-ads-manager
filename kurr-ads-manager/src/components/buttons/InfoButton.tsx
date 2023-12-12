@@ -7,17 +7,18 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 interface InfoButtonProps {
   title: string;
   description: string;
-  left?: number;
 }
 
-const InfoButton: React.FC<InfoButtonProps> = ({ title, description, left }) => {
+const InfoButton: React.FC<InfoButtonProps> = ({ title, description }) => {
   const [isHover, setIsHover] = useState(false);
 
   return (
-    <div>
+    <div style={{position:"absolute"}}>
+      <Info onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+        <InfoOutlinedIcon />
+      </Info>
       {isHover && (
         <InfoBox
-          left={left}
           onMouseOver={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >
@@ -25,12 +26,10 @@ const InfoButton: React.FC<InfoButtonProps> = ({ title, description, left }) => 
           <Menu>{description}</Menu>
         </InfoBox>
       )}
-      <Info onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-        <InfoOutlinedIcon />
-      </Info>
     </div>
-  );
-};
+    );
+  };
+    
 
 const Info = styled.div`
   background-color: transparent;
@@ -40,7 +39,7 @@ const Info = styled.div`
   }
 `;
 
-const InfoBox = styled.div`
+const InfoBox = styled.div<{ left?: number }>`
   display: grid;
   grid-template-rows: auto;
   grid-row-gap: 8px;
@@ -53,8 +52,8 @@ const InfoBox = styled.div`
   padding: 16px 16px;
   border: none;
   opacity: 0.87;
-  position: absolute;
-  left: ${(props) => (props.left ? `${props.left}px` : '0')};
+  position: relative;
+  z-index: 2;
 `;
 
 export default InfoButton;

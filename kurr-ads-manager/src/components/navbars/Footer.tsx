@@ -5,18 +5,18 @@ import { Default_bold } from '../../styles/Text';
 
 const Footer: React.FC = () => {
   return (
-    <FooterNav>
-      <Line />
-      <FooterContent>
-        <Default_bold style={{ color: Colors.kurr_black, fontSize: '14px' }}>
-          KURR AB ®
-        </Default_bold>
-        <img
-          src={'https://kurr.co/static/media/pasta.ed3cedff6f23e9a7935fba8d56ee1526.svg'}
-          alt="pasta"
-        />
-      </FooterContent>
-    </FooterNav>
+        <FooterNav>
+          <Line />
+          <FooterContent>
+            <Default_bold style={{ color: Colors.kurr_black, fontSize: '14px' }}>
+              KURR AB ®
+            </Default_bold>
+            <img
+              src={'https://kurr.co/static/media/pasta.ed3cedff6f23e9a7935fba8d56ee1526.svg'}
+              alt="pasta"
+            />
+          </FooterContent>
+        </FooterNav>
   );
 };
 

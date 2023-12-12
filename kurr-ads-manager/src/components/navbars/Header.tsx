@@ -76,6 +76,7 @@ const GridContainer = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 3%;
+  background-color: ${Colors.kurr_white};
 `;
 
 const Menu = styled.div`

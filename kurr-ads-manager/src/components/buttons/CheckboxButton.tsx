@@ -6,14 +6,18 @@ import CheckIcon from '@mui/icons-material/Check';
 
 interface CheckboxButtonProps {
   option1: string;
-  option2: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  //option2: string;
 }
 
-const CheckboxButton: React.FC<CheckboxButtonProps> = ({ option1, option2 }) => {
-  const [selected, setTarget] = useState<String>();
+const CheckboxButton: React.FC<CheckboxButtonProps> = ({ option1, onChange }) => {
+  const [selected, setTarget] = useState<string>();
 
   const handleSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTarget(event.target.value);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   return (
@@ -21,25 +25,13 @@ const CheckboxButton: React.FC<CheckboxButtonProps> = ({ option1, option2 }) => 
       <CheckboxWrapper>
         <StyledCheckbox
           type="checkbox"
-          id="option1"
-          value="option1"
-          name="option1"
+          id={option1}
+          value={option1}
+          name={option1}
           onChange={handleSelected}
         />
-        <Checkbox htmlFor="option1">
+        <Checkbox htmlFor={option1}>
           <Default>{option1}</Default>
-        </Checkbox>
-      </CheckboxWrapper>
-      <CheckboxWrapper>
-        <StyledCheckbox
-          type="checkbox"
-          id="option2"
-          value="option2"
-          name="option2"
-          onChange={handleSelected}
-        />
-        <Checkbox htmlFor="option2">
-          <Default>{option2}</Default>
         </Checkbox>
       </CheckboxWrapper>
     </Wrapper>
