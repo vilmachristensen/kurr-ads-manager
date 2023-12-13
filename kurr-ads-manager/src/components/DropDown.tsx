@@ -69,6 +69,9 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
                 '& .MuiMenuItem-root:hover': {
                   backgroundColor: Colors.grey_25,
                 },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: Colors.grey_45,
+                },
               },
             },
           }}

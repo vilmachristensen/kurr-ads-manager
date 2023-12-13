@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigation, useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import Ingredient from '../components/Ingredient';
 import { Header_small, Header_mini } from '../styles/Text';
@@ -8,19 +8,23 @@ import AdCard from '../components/AdCard';
 import styled from 'styled-components';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import InfoButton from '../components/buttons/InfoButton';
+import { useLocation } from "react-router-dom";
 
 const AdPage: React.FC = () => {
   const campaign = useCampaign();
   const navigate = useNavigate();
   const [click, setClick] = useState('');
+  const [selectedAd, setSelectedAd] = useState('');
+  const location = useLocation();
+  let id = 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+  id = location.state.id;
 
   const handleClick = () => {
     // Recept
   };
+
+  console.log("Mottaget id", id)
 
   return (
     <div>
@@ -40,18 +44,33 @@ const AdPage: React.FC = () => {
 
         <Space>
           <Grid>
-            <AdCard adType="BANNER" onClick={() => setClick('banner')}></AdCard>
-            <AdCard adType="INGREDIENT" onClick={() => setClick('ingredient')}></AdCard>
-            <AdCard adType="RECIPE" onClick={() => setClick('recipe')}></AdCard>
+            <AdCard
+              adType="BANNER"
+              onChange={() => setClick('banner')}
+              selectedType={selectedAd}
+              setSelectedType={setSelectedAd}
+            ></AdCard>
+            <AdCard
+              adType="INGREDIENT"
+              onChange={() => setClick('ingredient')}
+              selectedType={selectedAd}
+              setSelectedType={setSelectedAd}
+            ></AdCard>
+            <AdCard
+              adType="RECIPE"
+              onChange={() => setClick('recipe')}
+              selectedType={selectedAd}
+              setSelectedType={setSelectedAd}
+            ></AdCard>
           </Grid>
         </Space>
 
         {click === 'banner' && <Banner />}
         {click === 'ingredient' && <Ingredient />}
         {click === 'recipe' && (
-          <div style={{ paddingTop: 50, paddingBottom: 79 }}>
+          <RecipePage>
             <Header_mini>Receptuppladdning</Header_mini>
-            <div style={{ justifyContent: 'column', display: 'flex', gap: 25, paddingTop: 50 }}>
+            <Buttons>
               <PrimaryButton
                 title="Hämta skapade recept"
                 inHeader={false}
@@ -64,8 +83,8 @@ const AdPage: React.FC = () => {
                 disabled={false}
                 onClick={handleClick}
               ></PrimaryButton>
-            </div>
-          </div>
+            </Buttons>
+          </RecipePage>
         )}
       </div>
     </div>
@@ -88,6 +107,18 @@ const InfoSection = styled.div`
   flex-direction: row;
   gap: 5px;
   padding-bottom: 50px;
+`;
+
+const RecipePage = styled.div`
+  padding-top: 50px;
+  padding-bottom: 79px;
+`;
+
+const Buttons = styled.div`
+  justify-content: column;
+  display: flex;
+  gap: 25px;
+  padding-top: 50px;
 `;
 
 export default AdPage;

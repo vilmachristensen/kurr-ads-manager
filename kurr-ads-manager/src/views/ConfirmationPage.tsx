@@ -14,33 +14,41 @@ const handleClick = () => {
 
 const ConfirmationPage: React.FC = () => {
   return (
-    <Content>
-      <div style={{justifyContent: 'center'}}>
-      <div style={{ paddingLeft: 320, paddingBottom: 112 }}>
-        <Header>Nice kampanj!</Header>
-      </div>
-      <div style={{ paddingLeft: 210 }}>
+    <Grid>
+      <Content>
+        <div style={{ paddingBottom: 50 }}>
+          <Header>Nice kampanj!</Header>
+        </div>
         <img width={453} src={confirmation} alt="Nice kampanj!" />
-      </div>
-      <div style={{ paddingLeft: 380 }}>
-        <PrimaryButton
-          title="Kampanjöversikt"
-          inHeader={false}
-          disabled={false}
-          width={169}
-          onClick={handleClick}
-        ></PrimaryButton>
+        <Buttons>
+          <PrimaryButton
+            title="Kampanjöversikt"
+            inHeader={false}
+            disabled={false}
+            width={169}
+            onClick={handleClick}
+          ></PrimaryButton>
+        </Buttons>
         <SecondaryButton title="Skapa fler kampanjer"></SecondaryButton>
-      </div>
-      </div>
-    </Content>
+      </Content>
+    </Grid>
   );
 };
 
-const Content = styled.div`
+const Grid = styled.div`
   width: auto;
   display: flex;
   flex-direction: column;
+`;
+
+const Content = styled.div`
+  margin-right: 30%;
+  text-align: center;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 export default ConfirmationPage;

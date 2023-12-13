@@ -7,17 +7,16 @@ import QuaternaryButton from './buttons/QuaternaryButton';
 
 interface AdCardProps {
   adType: 'BANNER' | 'INGREDIENT' | 'RECIPE';
-  onClick: () => void;
+  onChange: (selectedOption: string) => void;
+  selectedType: string;
+  setSelectedType: (type: string) => void;
 }
 
-
-const AdCard: React.FC<AdCardProps> = ({ adType, onClick }) => {
-  const [isClicked, setIsClicked] = useState(false);
-
+const AdCard: React.FC<AdCardProps> = ({ adType, onChange, setSelectedType, selectedType }) => {
   const handleClick = () => {
-    setIsClicked(!isClicked);
-    if (onClick) {
-      onClick();
+    setSelectedType(adType);
+    if (onChange) {
+      onChange(adType);
     }
   };
 
@@ -28,17 +27,17 @@ const AdCard: React.FC<AdCardProps> = ({ adType, onClick }) => {
       case 'INGREDIENT':
         return [IngredientImage, 'Livsmedel'];
       case 'RECIPE':
-        return [RecipeImage, 'Recept']
+        return [RecipeImage, 'Recept'];
       default:
         return '';
     }
   };
 
   return (
-    <GridContainer isClicked={isClicked} onClick={handleClick}>
+    <GridContainer isClicked={selectedType === adType} onClick={handleClick}>
       <PictureArea src={getImageAndTitle()[0]} alt={adType} />
       <ButtonArea>
-        <QuaternaryButton title={getImageAndTitle()[1]} clicked={isClicked} />
+        <QuaternaryButton title={getImageAndTitle()[1]} clicked={selectedType === adType} />
       </ButtonArea>
     </GridContainer>
   );
@@ -48,11 +47,7 @@ const GridContainer = styled.div<{ isClicked: boolean }>`
   display: grid;
   grid-template-columns: auto;
   gap: 30px;
-  opacity: ${props => (props.isClicked === false ? 0.7 : 'none')};
-
-  &:hover {
-    opacity: 0.7;
-  }
+  opacity: ${(props) => (props.isClicked === false ? 0.7 : 'none')};
 `;
 
 const PictureArea = styled.img`

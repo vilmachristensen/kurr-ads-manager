@@ -28,7 +28,9 @@ const TargetGroupPage: React.FC = () => {
       ...campaign.campaign,
       targetGroups: [{ id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER), toAll: formTarget.toAll, ads: [] }],
     });
-    navigate('/AdPage');
+    navigate('/AdPage', {
+      state: { id: 0 },
+    });
   };
 
   return (

@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Colors from '../styles/Colors';
 
 const CampaignPage: React.FC = () => {
   const navigate = useNavigate();
@@ -120,6 +121,24 @@ const CampaignPage: React.FC = () => {
                 <MiniSection>
                   <Default style={{ paddingBottom: 5 }}>Startdatum</Default>
                   <DatePicker
+                    slotProps={{
+                      toolbar: {
+                        sx: {
+                          '& .MuiMenuItem-root.Mui-selected': {
+                            backgroundColor: Colors.grey_30,
+                          },
+                          '& .MuiMenuItem-root:hover': {
+                            backgroundColor: Colors.grey_25,
+                          },
+                          '& .MuiMenuItem-root:active': {
+                            backgroundColor: Colors.grey_25,
+                          },
+                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: Colors.grey_45,
+                          },
+                        }
+                      },
+                    }}
                     value={formCampaign.startDate}
                     onChange={(date) => setFormCampaign({ ...formCampaign, startDate: date })}
                   />

@@ -4,19 +4,32 @@ import { Banner, Ingredient } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
 import { Header_small, Header_mini, Default, Default_medium } from '../styles/Text';
 import PrimaryButton from '../components/buttons/PrimaryButton';
-import AddButton from '../components/buttons/AddButton';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import Colors from '../styles/Colors';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const PreviewPage: React.FC = () => {
   const campaign = useCampaign();
   const navigate = useNavigate();
+  const [targetGroupId, setTargetGroupId] = useState(0);
 
-  const handleClick = () => {
-    navigate('/ConfirmationPage')
+  const handleClick = (type: string) => {
+    {
+      type === 'Ad' && 
+        navigate('/AdPage', {
+          state: { id: /*targetGroupId*/ 0 },
+        });
+    }
+    {
+      type === 'TargetGroup' && navigate('/TargetGroupPage');
+    }
+    {
+      type === 'Confirmation' && navigate('/ConfirmationPage');
+    }
     console.log('Clicked');
   };
+
+  console.log("targetGroupId", targetGroupId)
 
   return (
     <Content>
@@ -55,13 +68,16 @@ const PreviewPage: React.FC = () => {
             title={'Lägg till målgrupp'}
             disabled={false}
             inHeader={false}
-            onClick={handleClick}
+            onClick={() => handleClick('TargetGroup')}
             width={178}
           />
         </MiniSection>
 
         {campaign.campaign.targetGroups.map((group) => (
           <TargetGroupSection>
+            {/** <>
+            {group.id !== null && setTargetGroupId(group.id)}
+            </>*/}
             {group.toAll ? (
               <MiniSection>
                 <Default_medium>Målgrupp</Default_medium>
@@ -99,14 +115,22 @@ const PreviewPage: React.FC = () => {
               <MiniSection>
                 <Default_medium>Annonser</Default_medium>
                 <AdSection>
-                  {ad.media}
-                  <AddCircleIcon style={{ marginRight: '5px', color: `${Colors.kurr_primary_piglet_peach}` }} />
+                  <Ad>{ad.media}</Ad>
+                  <Ad></Ad>
+                  <AddCircleIcon
+                    style={{ paddingLeft: '10px', color: `${Colors.kurr_primary_piglet_peach}` }}
+                    onClick={() => handleClick('Ad')}
+                  />
                 </AdSection>
                 <DetailSection>
                   <Default_medium>Annonstyp</Default_medium>
-                  <Default>
-                    {ad.adType.charAt(0).toUpperCase() + ad.adType.slice(1).toLowerCase()}
-                  </Default>
+                  {ad.adType === 'INGREDIENT' ? (
+                    <Default>Livsmedel </Default>
+                  ) : (
+                    <Default>
+                      {ad.adType.charAt(0).toUpperCase() + ad.adType.slice(1).toLowerCase()}{' '}
+                    </Default>
+                  )}
                 </DetailSection>
                 <DetailSection>
                   <Default_medium>Rubrik</Default_medium>
@@ -175,7 +199,7 @@ const PreviewPage: React.FC = () => {
           title={'Publicera'}
           disabled={false}
           inHeader={false}
-          onClick={handleClick}
+          onClick={() => handleClick('Confirmation')}
           width={116}
         />
       </PreviewContent>
@@ -216,13 +240,18 @@ const DetailSection = styled.div`
 `;
 
 const AdSection = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: rows;
+  gap: 20px;
+  align-items: center;
+`;
+
+const Ad = styled.div`
   width: 85px;
   height: 184px;
   border-radius: 4px;
-  background-color: ${Colors.grey_20}; 
-  grid-template-columns: auto auto auto;
-  gap: 5px;
+  border: 1px dashed ${Colors.grey_25};
+  background-color: ${Colors.white};
 `;
 
 const TargetGroupSection = styled.div`
@@ -233,5 +262,5 @@ const TargetGroupSection = styled.div`
   padding: 32px 32px;
   grid-template-columns: auto;
   gap: 45px;
-  box-shadow: 5px 10px 20px #E9E9E9;
+  box-shadow: 5px 10px 20px #e9e9e9;
 `;
