@@ -8,7 +8,8 @@ import AdCard from '../components/AdCard';
 import styled from 'styled-components';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import InfoButton from '../components/buttons/InfoButton';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import Phone from '../components/Phone';
 
 const AdPage: React.FC = () => {
   const campaign = useCampaign();
@@ -16,33 +17,33 @@ const AdPage: React.FC = () => {
   const [click, setClick] = useState('');
   const [selectedAd, setSelectedAd] = useState('');
   const location = useLocation();
-  let id = 0;
+  //let id = 0;
 
-  id = location.state.id;
+  //id = location.state.id;
 
   const handleClick = () => {
     // Recept
   };
 
-  console.log("Mottaget id", id)
+  //console.log("Mottaget id", id)
 
   return (
-    <div>
-      <Header_small>Skapa annons</Header_small>
-      <div style={{ paddingTop: 50 }}>
-        <InfoSection>
-          <div>
-            <Header_mini>Annonstyp*</Header_mini>
-          </div>
-          <div>
-            <InfoButton
-              title="Välj annonstyp"
-              description="Annonstyperna är banner, livsmedel och recept"
-            />
-          </div>
-        </InfoSection>
+    <Content>
+      <div style={{ paddingRight: 0 }}>
+        <Header_small>Skapa annons</Header_small>
+        <div style={{ paddingTop: 50 }}>
+          <InfoSection>
+            <div>
+              <Header_mini>Annonstyp*</Header_mini>
+            </div>
+            <div>
+              <InfoButton
+                title="Välj annonstyp"
+                description="Annonstyperna är banner, livsmedel och recept"
+              />
+            </div>
+          </InfoSection>
 
-        <Space>
           <Grid>
             <AdCard
               adType="BANNER"
@@ -63,43 +64,72 @@ const AdPage: React.FC = () => {
               setSelectedType={setSelectedAd}
             ></AdCard>
           </Grid>
-        </Space>
 
-        {click === 'banner' && <Banner />}
-        {click === 'ingredient' && <Ingredient />}
-        {click === 'recipe' && (
-          <RecipePage>
-            <Header_mini>Receptuppladdning</Header_mini>
-            <Buttons>
-              <PrimaryButton
-                title="Hämta skapade recept"
-                inHeader={false}
-                disabled={false}
-                onClick={handleClick}
-              ></PrimaryButton>
-              <PrimaryButton
-                title="Skapa nytt recept"
-                inHeader={false}
-                disabled={false}
-                onClick={handleClick}
-              ></PrimaryButton>
-            </Buttons>
-          </RecipePage>
-        )}
+          {click === 'banner' && <Banner />}
+          {click === 'ingredient' && <Ingredient />}
+          {click === 'recipe' && (
+            <RecipePage>
+              <Header_mini>Receptuppladdning</Header_mini>
+              <Buttons>
+                <PrimaryButton
+                  title="Hämta skapade recept"
+                  inHeader={false}
+                  disabled={false}
+                  onClick={handleClick}
+                ></PrimaryButton>
+                <PrimaryButton
+                  title="Skapa nytt recept"
+                  inHeader={false}
+                  disabled={false}
+                  onClick={handleClick}
+                ></PrimaryButton>
+              </Buttons>
+            </RecipePage>
+          )}
+        </div>
       </div>
-    </div>
+      {click === 'banner' ? (
+        <Preview>
+          <Phone
+            title={''}
+            profile={'El taco truck'}
+            description={''}
+            image={''}
+            buttonText={''}
+            buttonLink={''}
+            adType="BANNER"
+          />
+        </Preview>
+      ) : click === 'ingredient' ? (
+        <Preview>
+          <Phone
+            title={'El taco truck'}
+            profile={''}
+            description={''}
+            image={''}
+            adType="INGREDIENT"
+          />
+        </Preview>
+      ) : null}
+    </Content>
   );
 };
 
-const Grid = styled.div`
-  display: flex;  
-  flex-direction: row;
-  gap: 50px;
+const Content = styled.div`
+  display: grid;  
+  grid-template-columns: 49% auto;
+  gap: 10%;
 }`;
 
-const Space = styled.div`
-  display: grid;
-  grid-template-columns: 50% auto;
+const Preview = styled.div`
+  background-color: #00000;
+  width: 100px;  
+}`;
+
+const Grid = styled.div`
+  display: grid;  
+  grid-template-columns: auto auto auto;
+  gap: 50px;
 }`;
 
 const InfoSection = styled.div`

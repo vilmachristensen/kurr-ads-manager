@@ -6,14 +6,16 @@ import Colors from '../../src/styles/Colors';
 import Checkmark from '../../src/assets/Checkmark.svg';
 import ElTacoTruck from '../../src/assets/ElTacoTruck_logo.png';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import { useCampaign } from '../state/Context';
 
 interface IPhoneFrameProps {
   title: string;
   profile: string;
   description: string;
   image: string;
-  buttonText: string;
-  buttonLink: string;
+  buttonText?: string;
+  buttonLink?: string;
+  adType: string;
 }
 
 const Phone: React.FC<IPhoneFrameProps> = ({
@@ -23,53 +25,73 @@ const Phone: React.FC<IPhoneFrameProps> = ({
   image,
   buttonText,
   buttonLink,
+  adType,
 }) => {
-  const handleLink = () => {
-    window.location.href = `${buttonLink}`;
+  const campaign = useCampaign();
+  
+  const handleLink = (link: string) => {
+    window.location.href = link;
+  };
+
+  const getArrayLength = () => {
+    const length = campaign.campaign.targetGroups.length - 1;
+    return length;
   };
 
   return (
-    <Screen image={image}>
-      <TopBar />
-      <TopSection>
-        <StatusBar>
-          <img src={statusBar} width={340} alt="" />
-        </StatusBar>
-        <Default style={{ textAlign: 'center', color: Colors.white }}>{title}</Default>
-      </TopSection>
-      <BottomSection>
-        <BottomBar>
-          <Left>
-            <Profile>
-              <img src={ElTacoTruck} width={24} alt="" />
-              <Mini_text>{profile}</Mini_text>
-            </Profile>
-            <Mini_text>{description}</Mini_text>
-          </Left>
+    <div>
+      {campaign.campaign.targetGroups[getArrayLength()].ads.map((ad) => (
+        <Screen image={image}>
+          <TopBar />
+          <TopSection>
+            <StatusBar>
+              <img src={statusBar} width={280} alt="" />
+            </StatusBar>
+            <Default style={{ textAlign: 'center', color: Colors.white }}>{ad.caption}</Default>
+          </TopSection>
+          <BottomSection adType={adType}>
+            <BottomBar>
+              <Left>
+                <Profile>
+                  <img src={ElTacoTruck} width={24} alt="" />
+                  <Mini_text>{profile}</Mini_text>
+                </Profile>
+                <Mini_text>{ad.description}</Mini_text>
+              </Left>
 
-          <Right>
-            <Emission>
-              <Menu>3.96</Menu>
-              <Mini_text>CO2e</Mini_text>
-            </Emission>
-            <DietaryPreferences>
-              <img src={Checkmark} width={52} alt="" />
-              <Mini_text>Vegetarisk</Mini_text>
-            </DietaryPreferences>
-          </Right>
-        </BottomBar>
-        <Button onClick={handleLink}>
-          <Menu style={{ color: Colors.white }}>{buttonText}</Menu>
-          <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
-        </Button>
-      </BottomSection>
-    </Screen>
+              {adType && ad.adType === 'INGREDIENT' ? (
+                <Right>
+                  <Emission>
+                    <Menu>{ad.emission?.totalFootprint}</Menu>
+                    <Mini_text>CO2e</Mini_text>
+                  </Emission>
+                  <DietaryPreferences>
+                    <img src={Checkmark} width={52} alt="" />
+                    {ad.dietaryPreferences?.vegetarian && <Mini_text>Vegetariskt</Mini_text>}
+                    {ad.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
+                    {ad.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
+                    {ad.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
+                    {ad.dietaryPreferences?.gluten && <Mini_text>Glutenfri</Mini_text>}
+                  </DietaryPreferences>
+                </Right>
+              ) : null}
+            </BottomBar>
+            {adType && ad.adType === 'BANNER' ? (
+              <Button buttonColor={ad.button.buttonColor} onClick={() => handleLink(ad.button.link)}>
+                <Menu style={{ color: Colors.white }}>{ad.button.buttonText}</Menu>
+                <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
+              </Button>
+            ) : null}
+          </BottomSection>
+        </Screen>
+      ))}
+    </div>
   );
 };
 
 const Screen = styled.div<{ image?: string }>`
-  width: 315px;
-  height: 657px;
+  width: 250px;
+  height: 521px;
   background: ${Colors.kurr_primary_piglet_peach};
   background-image: url('https://www.pleasecopyme.se/wp-content/uploads/2012/06/max_wraps.jpg');
   border-radius: 34px;
@@ -88,14 +110,14 @@ const TopBar = styled.div`
   border-bottom-right-radius: 20px;
   position: relative;
   top: -25px;
-  left: 29%;
+  left: 23%;
 `;
 
 const StatusBar = styled.div`
   width: auto;
   position: relative;
-  top: -40px;
-  right: 12px;
+  top: -43px;
+  right: 15px;
 `;
 
 const TopSection = styled.div`
@@ -113,11 +135,11 @@ const BottomBar = styled.div`
   gap: 3%;
 `;
 
-const BottomSection = styled.div`
+const BottomSection = styled.div<{ adType?: string }>`
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 60%;
+  top: ${(props) => (props.adType === 'BANNER' ? '55%' : '65%')};
   gap: 16px;
 `;
 
@@ -155,11 +177,11 @@ const Profile = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ buttonColor?: string }>`
   display: flex;
   width: 100%;
   height: 40px;
-  background-color: ${Colors.kurr_black};
+  background-color: ${(props) => (props.buttonColor ? props.buttonColor : Colors.kurr_black)};
   border-radius: 4px;
   border: none;
   text-align: left;

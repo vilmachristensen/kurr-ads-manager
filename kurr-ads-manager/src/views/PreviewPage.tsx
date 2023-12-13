@@ -15,10 +15,11 @@ const PreviewPage: React.FC = () => {
 
   const handleClick = (type: string) => {
     {
-      type === 'Ad' && 
+      /*type === 'Ad' && 
         navigate('/AdPage', {
-          state: { id: /*targetGroupId*/ 0 },
-        });
+          state: { id: targetGroupId 0 },
+        });*/
+        type === 'Ad' && navigate('/AdPage');
     }
     {
       type === 'TargetGroup' && navigate('/TargetGroupPage');
