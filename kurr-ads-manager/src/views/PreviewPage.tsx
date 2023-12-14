@@ -207,8 +207,8 @@ const PreviewPage: React.FC = () => {
       </PreviewContent>
       <Preview>
           <Phone
-            title={'El taco truck'}
-            profile={''}
+            title={''}
+            profile={'El taco truck'}
             description={''}
             image={''}
             adType="INGREDIENT"
@@ -234,7 +234,11 @@ const PreviewContent = styled.div`
 `;
 
 const Preview = styled.div`
-  width: 100px;  
+  position: fixed;
+  top: 130px; 
+  right: 80px;
+  display: flex;
+  justify-content: flex-end;
 }`;
 
 const Section = styled.div`

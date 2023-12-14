@@ -36,7 +36,7 @@ const Phone: React.FC<IPhoneFrameProps> = ({
   const campaign = useCampaign();
 
   const handleLink = (link: string) => {
-    window.location.href = link;
+    window.open(link, '_blank');
   };
 
   const getArrayLength = () => {
@@ -46,7 +46,7 @@ const Phone: React.FC<IPhoneFrameProps> = ({
 
   return (
     <div>
-      {(formBanner || formIngredient) !== null ? (
+      {(formBanner || formIngredient) !== undefined ? (
         <div>
           <Screen image={image}>
             <TopBar />
@@ -55,7 +55,7 @@ const Phone: React.FC<IPhoneFrameProps> = ({
                 <img src={statusBar} width={280} alt="" />
               </StatusBar>
               <Default style={{ textAlign: 'center', color: Colors.white }}>
-                {formBanner.caption || formIngredient.caption}
+                {formBanner && formBanner.caption || formIngredient && formIngredient.caption}
               </Default>
             </TopSection>
             <BottomSection adType={adType}>
@@ -65,10 +65,10 @@ const Phone: React.FC<IPhoneFrameProps> = ({
                     <img src={ElTacoTruck} width={24} alt="" />
                     <Mini_text>{profile}</Mini_text>
                   </Profile>
-                  <Mini_text>{formBanner.description || formIngredient.description}</Mini_text>
+                  <Mini_text>{ formBanner && formBanner.description || formIngredient && formIngredient.description}</Mini_text>
                 </Left>
 
-                {adType === 'INGREDIENT' ? (
+                {adType === 'INGREDIENT' && formIngredient? (
                   <Right>
                     <Emission>
                       <Menu>{formIngredient.emission?.totalFootprint}</Menu>
@@ -89,7 +89,7 @@ const Phone: React.FC<IPhoneFrameProps> = ({
                   </Right>
                 ) : null}
               </BottomBar>
-              {adType === 'BANNER' ? (
+              {adType === 'BANNER' && formBanner ? (
                 <Button
                   buttonColor={formBanner.button.buttonColor}
                   onClick={() => handleLink(formBanner.button.link)}
