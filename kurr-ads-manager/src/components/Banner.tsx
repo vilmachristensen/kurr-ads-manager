@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
 import { useNavigate } from 'react-router-dom';
 import { Default, Header_mini } from '../styles/Text';
@@ -8,7 +8,12 @@ import ColorPicker from './ColorPicker';
 import PrimaryButton from './buttons/PrimaryButton';
 import styled from 'styled-components';
 
-const Banner: React.FC = () => {
+
+interface BannerProps {
+  getFormBanner: any
+}
+
+const Banner: React.FC<BannerProps> = ({ getFormBanner }) => {
   const campaign = useCampaign();
   const navigate = useNavigate();
 
@@ -21,6 +26,10 @@ const Banner: React.FC = () => {
     adType: 'BANNER',
     button: { link: '', buttonText: '', buttonColor: '#262626' },
   });
+
+  useEffect(() => {
+    getFormBanner(formBanner)
+  }, [formBanner])
 
   const handleClick = () => {
     campaign.setCampaign({
@@ -48,8 +57,6 @@ const Banner: React.FC = () => {
           : group,
       ),
     });
-
-    console.log('Skickat banner annons');
     navigate('/PreviewPage');
   };
 

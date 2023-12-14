@@ -36,7 +36,7 @@ const PageContainer = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  flex: 1; 
+  flex: 1;
 `;
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -44,46 +44,38 @@ root.render(
   <StrictMode>
     <CampaignProvider>
       <BrowserRouter>
-      <PageContainer>
-        <Header />
-        <ContentWrapper>
-        <Layout>
-          <div>
-            <VerticalNavbar />
-          </div>
-          <Content>
-            <Routes>
-              {' '}
-              <Route path="/" Component={CampaignPage} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/TargetGroupPage" Component={TargetGroupPage} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/AdPage" Component={AdPage} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/PreviewPage" Component={PreviewPage} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/ConfirmationPage" Component={ConfirmationPage} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/Banner" Component={Banner} />
-            </Routes>
-            <Routes>
-              {' '}
-              <Route path="/Ingredient" Component={Ingredient} />
-            </Routes>
-          </Content>
-        </Layout>
-        </ContentWrapper>
-        <Footer />
+        <PageContainer>
+          <Header />
+          <ContentWrapper>
+            <Layout>
+              <div>
+                <VerticalNavbar />
+              </div>
+              <Content>
+                <Routes>
+                  {' '}
+                  <Route path="/" Component={CampaignPage} />
+                </Routes>
+                <Routes>
+                  {' '}
+                  <Route path="/TargetGroupPage" Component={TargetGroupPage} />
+                </Routes>
+                <Routes>
+                  {' '}
+                  <Route path="/AdPage" Component={AdPage} />
+                </Routes>
+                <Routes>
+                  {' '}
+                  <Route path="/PreviewPage" Component={PreviewPage} />
+                </Routes>
+                <Routes>
+                  {' '}
+                  <Route path="/ConfirmationPage" Component={ConfirmationPage} />
+                </Routes>
+              </Content>
+            </Layout>
+          </ContentWrapper>
+          <Footer />
         </PageContainer>
       </BrowserRouter>
     </CampaignProvider>

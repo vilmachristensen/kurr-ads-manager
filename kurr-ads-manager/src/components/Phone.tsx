@@ -15,7 +15,10 @@ interface IPhoneFrameProps {
   image: string;
   buttonText?: string;
   buttonLink?: string;
+  buttonColor?: string;
   adType: string;
+  formBanner?: any;
+  formIngredient?: any;
 }
 
 const Phone: React.FC<IPhoneFrameProps> = ({
@@ -25,10 +28,13 @@ const Phone: React.FC<IPhoneFrameProps> = ({
   image,
   buttonText,
   buttonLink,
+  buttonColor,
   adType,
+  formBanner,
+  formIngredient,
 }) => {
   const campaign = useCampaign();
-  
+
   const handleLink = (link: string) => {
     window.location.href = link;
   };
@@ -40,51 +46,113 @@ const Phone: React.FC<IPhoneFrameProps> = ({
 
   return (
     <div>
-      {campaign.campaign.targetGroups[getArrayLength()].ads.map((ad) => (
-        <Screen image={image}>
-          <TopBar />
-          <TopSection>
-            <StatusBar>
-              <img src={statusBar} width={280} alt="" />
-            </StatusBar>
-            <Default style={{ textAlign: 'center', color: Colors.white }}>{ad.caption}</Default>
-          </TopSection>
-          <BottomSection adType={adType}>
-            <BottomBar>
-              <Left>
-                <Profile>
-                  <img src={ElTacoTruck} width={24} alt="" />
-                  <Mini_text>{profile}</Mini_text>
-                </Profile>
-                <Mini_text>{ad.description}</Mini_text>
-              </Left>
+      {(formBanner || formIngredient) !== null ? (
+        <div>
+          <Screen image={image}>
+            <TopBar />
+            <TopSection>
+              <StatusBar>
+                <img src={statusBar} width={280} alt="" />
+              </StatusBar>
+              <Default style={{ textAlign: 'center', color: Colors.white }}>
+                {formBanner.caption || formIngredient.caption}
+              </Default>
+            </TopSection>
+            <BottomSection adType={adType}>
+              <BottomBar>
+                <Left>
+                  <Profile>
+                    <img src={ElTacoTruck} width={24} alt="" />
+                    <Mini_text>{profile}</Mini_text>
+                  </Profile>
+                  <Mini_text>{formBanner.description || formIngredient.description}</Mini_text>
+                </Left>
 
-              {adType && ad.adType === 'INGREDIENT' ? (
-                <Right>
-                  <Emission>
-                    <Menu>{ad.emission?.totalFootprint}</Menu>
-                    <Mini_text>CO2e</Mini_text>
-                  </Emission>
-                  <DietaryPreferences>
-                    <img src={Checkmark} width={52} alt="" />
-                    {ad.dietaryPreferences?.vegetarian && <Mini_text>Vegetariskt</Mini_text>}
-                    {ad.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
-                    {ad.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
-                    {ad.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
-                    {ad.dietaryPreferences?.gluten && <Mini_text>Glutenfri</Mini_text>}
-                  </DietaryPreferences>
-                </Right>
+                {adType === 'INGREDIENT' ? (
+                  <Right>
+                    <Emission>
+                      <Menu>{formIngredient.emission?.totalFootprint}</Menu>
+                      <Mini_text>CO2e</Mini_text>
+                    </Emission>
+                    <DietaryPreferences>
+                      <img src={Checkmark} width={52} alt="" />
+                      {formIngredient.dietaryPreferences?.vegetarian && (
+                        <Mini_text>Vegetariskt</Mini_text>
+                      )}
+                      {formIngredient.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
+                      {formIngredient.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
+                      {formIngredient.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
+                      {formIngredient.dietaryPreferences?.gluten && (
+                        <Mini_text>Glutenfri</Mini_text>
+                      )}
+                    </DietaryPreferences>
+                  </Right>
+                ) : null}
+              </BottomBar>
+              {adType === 'BANNER' ? (
+                <Button
+                  buttonColor={formBanner.button.buttonColor}
+                  onClick={() => handleLink(formBanner.button.link)}
+                >
+                  <Menu style={{ color: Colors.white }}>{formBanner.button.buttonText}</Menu>
+                  <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
+                </Button>
               ) : null}
-            </BottomBar>
-            {adType && ad.adType === 'BANNER' ? (
-              <Button buttonColor={ad.button.buttonColor} onClick={() => handleLink(ad.button.link)}>
-                <Menu style={{ color: Colors.white }}>{ad.button.buttonText}</Menu>
-                <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
-              </Button>
-            ) : null}
-          </BottomSection>
-        </Screen>
-      ))}
+            </BottomSection>
+          </Screen>
+        </div>
+      ) : (
+        <div>
+          {campaign.campaign.targetGroups[getArrayLength()].ads.map((ad) => (
+            <Screen image={image}>
+              <TopBar />
+              <TopSection>
+                <StatusBar>
+                  <img src={statusBar} width={280} alt="" />
+                </StatusBar>
+                <Default style={{ textAlign: 'center', color: Colors.white }}>{ad.caption}</Default>
+              </TopSection>
+              <BottomSection adType={adType}>
+                <BottomBar>
+                  <Left>
+                    <Profile>
+                      <img src={ElTacoTruck} width={24} alt="" />
+                      <Mini_text>{profile}</Mini_text>
+                    </Profile>
+                    <Mini_text>{ad.description}</Mini_text>
+                  </Left>
+
+                  {adType && ad.adType === 'INGREDIENT' ? (
+                    <Right>
+                      <Emission>
+                        <Menu>{ad.emission?.totalFootprint}</Menu>
+                        <Mini_text>CO2e</Mini_text>
+                      </Emission>
+                      <DietaryPreferences>
+                        <img src={Checkmark} width={52} alt="" />
+                        {ad.dietaryPreferences?.vegetarian && <Mini_text>Vegetariskt</Mini_text>}
+                        {ad.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
+                        {ad.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
+                        {ad.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
+                        {ad.dietaryPreferences?.gluten && <Mini_text>Glutenfri</Mini_text>}
+                      </DietaryPreferences>
+                    </Right>
+                  ) : null}
+                </BottomBar>
+                {adType && ad.adType === 'BANNER' ? (
+                  <Button
+                    buttonColor={ad.button.buttonColor}
+                    onClick={() => handleLink(ad.button.link)}
+                  >
+                    <Menu style={{ color: Colors.white }}>{ad.button.buttonText}</Menu>
+                    <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
+                  </Button>
+                ) : null}
+              </BottomSection>
+            </Screen>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

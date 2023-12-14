@@ -7,6 +7,7 @@ import PrimaryButton from '../components/buttons/PrimaryButton';
 import { MouseEvent, useState } from 'react';
 import Colors from '../styles/Colors';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Phone from '../components/Phone';
 
 const PreviewPage: React.FC = () => {
   const campaign = useCampaign();
@@ -19,7 +20,7 @@ const PreviewPage: React.FC = () => {
         navigate('/AdPage', {
           state: { id: targetGroupId 0 },
         });*/
-        type === 'Ad' && navigate('/AdPage');
+      type === 'Ad' && navigate('/AdPage');
     }
     {
       type === 'TargetGroup' && navigate('/TargetGroupPage');
@@ -30,7 +31,7 @@ const PreviewPage: React.FC = () => {
     console.log('Clicked');
   };
 
-  console.log("targetGroupId", targetGroupId)
+  console.log('targetGroupId', targetGroupId);
 
   return (
     <Content>
@@ -204,6 +205,16 @@ const PreviewPage: React.FC = () => {
           width={116}
         />
       </PreviewContent>
+      <Preview>
+          <Phone
+            title={'El taco truck'}
+            profile={''}
+            description={''}
+            image={''}
+            adType="INGREDIENT"
+          />
+        </Preview>
+
     </Content>
   );
 };
@@ -212,8 +223,8 @@ export default PreviewPage;
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 50% auto;
-  gap: 50px;
+  grid-template-columns: 49% auto;
+  gap: 10%;
 `;
 
 const PreviewContent = styled.div`
@@ -221,6 +232,10 @@ const PreviewContent = styled.div`
   grid-template-rows: auto auto;
   gap: 50px;
 `;
+
+const Preview = styled.div`
+  width: 100px;  
+}`;
 
 const Section = styled.div`
   display: grid;

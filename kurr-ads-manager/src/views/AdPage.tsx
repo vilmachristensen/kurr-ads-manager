@@ -17,6 +17,18 @@ const AdPage: React.FC = () => {
   const [click, setClick] = useState('');
   const [selectedAd, setSelectedAd] = useState('');
   const location = useLocation();
+
+  const [formBanner, setFormBanner] = useState('');
+  const [formIngredient, setformIngredient] = useState('');
+
+  const getFormBanner = (formBanner: string) => {
+    setFormBanner(formBanner);
+  };
+
+  const getFormIngredient = (formIngredient: string) => {
+    setformIngredient(formIngredient);
+  };
+
   //let id = 0;
 
   //id = location.state.id;
@@ -26,6 +38,7 @@ const AdPage: React.FC = () => {
   };
 
   //console.log("Mottaget id", id)
+  console.log("formBanner i AdPage", formBanner)
 
   return (
     <Content>
@@ -65,8 +78,8 @@ const AdPage: React.FC = () => {
             ></AdCard>
           </Grid>
 
-          {click === 'banner' && <Banner />}
-          {click === 'ingredient' && <Ingredient />}
+          {click === 'banner' && <Banner getFormBanner={getFormBanner}/>}
+          {click === 'ingredient' && <Ingredient getFormIngredient={getFormIngredient}/>}
           {click === 'recipe' && (
             <RecipePage>
               <Header_mini>Receptuppladdning</Header_mini>
@@ -97,7 +110,10 @@ const AdPage: React.FC = () => {
             image={''}
             buttonText={''}
             buttonLink={''}
+            buttonColor={''}
             adType="BANNER"
+            formBanner={formBanner}
+            formIngredient={formIngredient}
           />
         </Preview>
       ) : click === 'ingredient' ? (
@@ -108,6 +124,8 @@ const AdPage: React.FC = () => {
             description={''}
             image={''}
             adType="INGREDIENT"
+            formBanner={formBanner}
+            formIngredient={formIngredient}
           />
         </Preview>
       ) : null}
@@ -122,7 +140,6 @@ const Content = styled.div`
 }`;
 
 const Preview = styled.div`
-  background-color: #00000;
   width: 100px;  
 }`;
 

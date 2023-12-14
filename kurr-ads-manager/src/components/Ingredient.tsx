@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
 import { useNavigate } from 'react-router-dom';
 import { Default, Header_mini } from '../styles/Text';
@@ -11,7 +11,11 @@ import CheckboxButton from './buttons/CheckboxButton';
 import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
 import Colors from '../styles/Colors';
 
-const Ingredient: React.FC = () => {
+interface IngredientProps {
+  getFormIngredient: any;
+}
+
+const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
   const campaign = useCampaign();
   const navigate = useNavigate();
 
@@ -34,6 +38,10 @@ const Ingredient: React.FC = () => {
     bgColor: '#262626',
     media: '',
   });
+
+  useEffect(() => {
+    getFormIngredient(formIngredient)
+  }, [formIngredient])
 
   const handleClick = () => {
     campaign.setCampaign({
