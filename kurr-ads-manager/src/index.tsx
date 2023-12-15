@@ -1,33 +1,27 @@
-import React from 'react';
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
+import { CampaignProvider } from './state/Context';
 import CampaignPage from './views/CampaignPage';
-import { CampaignProvider, useCampaign } from './state/Context';
 import TargetGroupPage from './views/TargetGroupPage';
-import { Campaign } from './types/Types';
 import AdPage from './views/AdPage';
 import PreviewPage from './views/PreviewPage';
-import Banner from './components/Banner';
-import Ingredient from './components/Ingredient';
+import ConfirmationPage from './views/ConfirmationPage';
 import Header from './components/navbars/Header';
 import VerticalNavbar from './components/navbars/VerticalNavbar';
 import Footer from './components/navbars/Footer';
 import styled from 'styled-components';
-import Colors from './styles/Colors';
-import ConfirmationPage from './views/ConfirmationPage';
 
 const Layout = styled.div`
   display: grid;
   grid-template-columns: 22% auto;
-}`;
+`;
 
 const Content = styled.div`
   padding-top: 3%;
-}`;
+`;
 
 const PageContainer = styled.div`
   display: flex;
@@ -39,50 +33,49 @@ const ContentWrapper = styled.div`
   flex: 1;
 `;
 
+const App = () => {
+  const [activePage, setActivePage] = useState<string>('');
+  const location = useLocation();
+
+  useEffect(() => {
+    // Update activePage whenever the location changes
+    setActivePage(location.pathname);
+  }, [location]);
+
+  console.log("activePage", activePage)
+
+  return (
+    <PageContainer>
+      <Header />
+      <ContentWrapper>
+        <Layout>
+          <div>
+            {/* Pass activePage as a prop to VerticalNavbar */}
+            <VerticalNavbar activePage={activePage}/>
+          </div>
+          <Content>
+            <Routes>
+              <Route path="/" element={<CampaignPage />} />
+              <Route path="/TargetGroupPage" element={<TargetGroupPage />} />
+              <Route path="/AdPage" element={<AdPage />} />
+              <Route path="/PreviewPage" element={<PreviewPage />} />
+              <Route path="/ConfirmationPage" element={<ConfirmationPage />} />
+            </Routes>
+          </Content>
+        </Layout>
+      </ContentWrapper>
+      <Footer />
+    </PageContainer>
+  );
+};
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <StrictMode>
+  <BrowserRouter>
     <CampaignProvider>
-      <BrowserRouter>
-        <PageContainer>
-          <Header />
-          <ContentWrapper>
-            <Layout>
-              <div>
-                <VerticalNavbar />
-              </div>
-              <Content>
-                <Routes>
-                  {' '}
-                  <Route path="/" Component={CampaignPage} />
-                </Routes>
-                <Routes>
-                  {' '}
-                  <Route path="/TargetGroupPage" Component={TargetGroupPage} />
-                </Routes>
-                <Routes>
-                  {' '}
-                  <Route path="/AdPage" Component={AdPage} />
-                </Routes>
-                <Routes>
-                  {' '}
-                  <Route path="/PreviewPage" Component={PreviewPage} />
-                </Routes>
-                <Routes>
-                  {' '}
-                  <Route path="/ConfirmationPage" Component={ConfirmationPage} />
-                </Routes>
-              </Content>
-            </Layout>
-          </ContentWrapper>
-          <Footer />
-        </PageContainer>
-      </BrowserRouter>
+      <App />
     </CampaignProvider>
-  </StrictMode>,
+  </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

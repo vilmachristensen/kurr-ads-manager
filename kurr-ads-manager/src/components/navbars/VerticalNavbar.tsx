@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Colors from '../../styles/Colors';
 import { Default, Menu } from '../../styles/Text';
@@ -10,7 +10,11 @@ interface NavBarProps {
   title: string;
 }
 
-const VerticalNavbar: React.FC = () => {
+interface VerticalNavbarProps {
+  activePage: string;
+}
+
+const VerticalNavbar: React.FC<VerticalNavbarProps> = ({ activePage }) => {
   const [navBarArray, setNavBarArray] = useState<NavBarProps[]>([
     {
       navBarNumber: 1,
@@ -41,6 +45,20 @@ const VerticalNavbar: React.FC = () => {
     { navigation: '/AdPage' },
     { navigation: '/PreviewPage' },
   ];
+
+  useEffect(() => {
+    {
+      activePage === '/'
+        ? handleNavBar(1)
+        : activePage === '/TargetGroupPage'
+        ? handleNavBar(2)
+        : activePage === '/AdPage'
+        ? handleNavBar(3)
+        : activePage === '/PreviewPage'
+        ? handleNavBar(4)
+        : null;
+    }
+  }, [activePage]);
 
   const handleNavBar = (number: number) => {
     setNavBarArray((prevArray) =>

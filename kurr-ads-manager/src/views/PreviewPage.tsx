@@ -20,7 +20,18 @@ const PreviewPage: React.FC = () => {
         navigate('/AdPage', {
           state: { id: targetGroupId 0 },
         });*/
-      type === 'Ad' && navigate('/AdPage');
+
+      {
+        campaign.campaign.targetGroups.map((group) => {
+          if (group.id !== null) {
+            //setTargetGroupId(group.id);
+            type === 'Ad' &&
+              navigate('/AdPage', {
+                state: { id: group.id },
+              });
+          }
+        });
+      }
     }
     {
       type === 'TargetGroup' && navigate('/TargetGroupPage');
@@ -30,8 +41,6 @@ const PreviewPage: React.FC = () => {
     }
     console.log('Clicked');
   };
-
-  console.log('targetGroupId', targetGroupId);
 
   return (
     <Content>
@@ -76,10 +85,7 @@ const PreviewPage: React.FC = () => {
         </MiniSection>
 
         {campaign.campaign.targetGroups.map((group) => (
-          <TargetGroupSection>
-            {/** <>
-            {group.id !== null && setTargetGroupId(group.id)}
-            </>*/}
+          <TargetGroupSection key={group.id}>
             {group.toAll ? (
               <MiniSection>
                 <Default_medium>Målgrupp</Default_medium>
@@ -113,88 +119,93 @@ const PreviewPage: React.FC = () => {
                 </DetailSection>
               </MiniSection>
             )}
-            {group.ads.map((ad) => (
-              <MiniSection>
-                <Default_medium>Annonser</Default_medium>
-                <AdSection>
-                  <Ad>{ad.media}</Ad>
-                  <Ad></Ad>
-                  <AddCircleIcon
-                    style={{ paddingLeft: '10px', color: `${Colors.kurr_primary_piglet_peach}` }}
-                    onClick={() => handleClick('Ad')}
-                  />
-                </AdSection>
-                <DetailSection>
-                  <Default_medium>Annonstyp</Default_medium>
-                  {ad.adType === 'INGREDIENT' ? (
-                    <Default>Livsmedel </Default>
-                  ) : (
-                    <Default>
-                      {ad.adType.charAt(0).toUpperCase() + ad.adType.slice(1).toLowerCase()}{' '}
-                    </Default>
-                  )}
-                </DetailSection>
-                <DetailSection>
-                  <Default_medium>Rubrik</Default_medium>
-                  <Default>{ad.caption}</Default>
-                </DetailSection>
-                <DetailSection>
-                  <Default_medium>Bildtext</Default_medium>
-                  <Default>{ad.description}</Default>
-                </DetailSection>
-                {ad.adType === 'BANNER' ? (
-                  <MiniSection>
+            <MiniSection>
+              <Default_medium>Annonser</Default_medium>
+              <AdSection>
+                {group.ads.map((ad) => (
+                  <div style={{display:"flex", flexDirection: "column", gap:20, width:"auto"}}>
+                    <Ad>{ad.media}</Ad>
                     <DetailSection>
-                      <Default_medium>Länk</Default_medium>
-                      <Default>{ad.button.link}</Default>
+                      <Default_medium>Annonstyp</Default_medium>
+                      {ad.adType === 'INGREDIENT' ? (
+                        <Default>Livsmedel </Default>
+                      ) : (
+                        <Default>
+                          {ad.adType.charAt(0).toUpperCase() + ad.adType.slice(1).toLowerCase()}{' '}
+                        </Default>
+                      )}
                     </DetailSection>
                     <DetailSection>
-                      <Default_medium>Knapp text</Default_medium>
-                      <Default>{ad.button.buttonText}</Default>
+                      <Default_medium>Rubrik</Default_medium>
+                      <Default>{ad.caption}</Default>
                     </DetailSection>
                     <DetailSection>
-                      <Default_medium>Knapp färg</Default_medium>
-                      <Default>{ad.button.buttonColor}</Default>
+                      <Default_medium>Bildtext</Default_medium>
+                      <Default>{ad.description}</Default>
                     </DetailSection>
-                  </MiniSection>
-                ) : (
-                  <MiniSection>
-                    <DetailSection>
-                      <Default_medium>Kategori</Default_medium>
-                      <Default>{ad.category}</Default>
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Specialkost</Default_medium>
-                      {ad.dietaryPreferences?.dairy === true && <Default>Laktosfri</Default>}
-                      {ad.dietaryPreferences?.gluten === true && <Default>Glutenfri</Default>}
-                      {ad.dietaryPreferences?.nuts === true && <Default>Fri från nötter</Default>}
-                      {ad.dietaryPreferences?.vegan === true && <Default>Vegansk</Default>}
-                      {ad.dietaryPreferences?.vegetarian === true && <Default>Vegetarisk</Default>}
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Näringsvärden</Default_medium>
-                      <Default>{ad.nutritionValues}</Default>
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Totalt koldioxidutsläpp</Default_medium>
-                      <Default>{ad.emission?.totalFootprint}</Default>
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Vikt i gram per styck</Default_medium>
-                      <Default>{ad.weight?.gramsPerPiece}</Default>
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Vikt i gram per förpackning</Default_medium>
-                      <Default>{ad.weight?.gramsPerPackage}</Default>
-                    </DetailSection>
-                    <DetailSection>
-                      <Default_medium>Bakgrundsfärg</Default_medium>
-                      <Default>{ad.bgColor}</Default>
-                    </DetailSection>
-                  </MiniSection>
-                )}
-              </MiniSection>
-            ))}
+                    {ad.adType === 'BANNER' ? (
+                      <MiniSection>
+                        <DetailSection>
+                          <Default_medium>Länk</Default_medium>
+                          <Default>{ad.button.link}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Knapp text</Default_medium>
+                          <Default>{ad.button.buttonText}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Knapp färg</Default_medium>
+                          <Default>{ad.button.buttonColor}</Default>
+                        </DetailSection>
+                      </MiniSection>
+                    ) : (
+                      <MiniSection>
+                        <DetailSection>
+                          <Default_medium>Kategori</Default_medium>
+                          <Default>{ad.category}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Specialkost</Default_medium>
+                          {ad.dietaryPreferences?.dairy === true && <Default>Laktosfri</Default>}
+                          {ad.dietaryPreferences?.gluten === true && <Default>Glutenfri</Default>}
+                          {ad.dietaryPreferences?.nuts === true && (
+                            <Default>Fri från nötter</Default>
+                          )}
+                          {ad.dietaryPreferences?.vegan === true && <Default>Vegansk</Default>}
+                          {ad.dietaryPreferences?.vegetarian === true && (
+                            <Default>Vegetarisk</Default>
+                          )}
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Näringsvärden</Default_medium>
+                          <Default>{ad.nutritionValues}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Totalt koldioxidutsläpp</Default_medium>
+                          <Default>{ad.emission?.totalFootprint}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Vikt i gram per styck</Default_medium>
+                          <Default>{ad.weight?.gramsPerPiece}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Vikt i gram per förpackning</Default_medium>
+                          <Default>{ad.weight?.gramsPerPackage}</Default>
+                        </DetailSection>
+                        <DetailSection>
+                          <Default_medium>Bakgrundsfärg</Default_medium>
+                          <Default>{ad.bgColor}</Default>
+                        </DetailSection>
+                      </MiniSection>
+                    )}
+                  </div>
+                ))}
+                <AddCircleIcon
+                  style={{ paddingLeft: '10px', color: `${Colors.kurr_primary_piglet_peach}` }}
+                  onClick={() => handleClick('Ad')}
+                />
+              </AdSection>
+            </MiniSection>
           </TargetGroupSection>
         ))}
         <PrimaryButton
@@ -206,15 +217,14 @@ const PreviewPage: React.FC = () => {
         />
       </PreviewContent>
       <Preview>
-          <Phone
-            title={''}
-            profile={'El taco truck'}
-            description={''}
-            image={''}
-            adType="INGREDIENT"
-          />
-        </Preview>
-
+        <Phone
+          title={''}
+          profile={'El taco truck'}
+          description={''}
+          image={''}
+          adType="INGREDIENT"
+        />
+      </Preview>
     </Content>
   );
 };
@@ -261,7 +271,7 @@ const DetailSection = styled.div`
 
 const AdSection = styled.div`
   display: flex;
-  flex-direction: rows;
+  flex-direction: row;
   gap: 20px;
   align-items: center;
 `;

@@ -16,7 +16,10 @@ const AdPage: React.FC = () => {
   const navigate = useNavigate();
   const [click, setClick] = useState('');
   const [selectedAd, setSelectedAd] = useState('');
+
   const location = useLocation();
+
+  const { id } = location.state || {};
 
   const [formBanner, setFormBanner] = useState('');
   const [formIngredient, setformIngredient] = useState('');
@@ -29,16 +32,12 @@ const AdPage: React.FC = () => {
     setformIngredient(formIngredient);
   };
 
-  //let id = 0;
-
-  //id = location.state.id;
 
   const handleClick = () => {
     // Recept
   };
 
-  //console.log("Mottaget id", id)
-  console.log("formBanner i AdPage", formBanner)
+  console.log("Mottaget id", id)
 
   return (
     <Content>
@@ -78,7 +77,7 @@ const AdPage: React.FC = () => {
             ></AdCard>
           </Grid>
 
-          {click === 'banner' && <Banner getFormBanner={getFormBanner}/>}
+          {click === 'banner' && <Banner getFormBanner={getFormBanner} id={id}/>}
           {click === 'ingredient' && <Ingredient getFormIngredient={getFormIngredient}/>}
           {click === 'recipe' && (
             <RecipePage>

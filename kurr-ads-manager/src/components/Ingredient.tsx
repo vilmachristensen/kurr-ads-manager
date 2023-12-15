@@ -13,9 +13,10 @@ import Colors from '../styles/Colors';
 
 interface IngredientProps {
   getFormIngredient: any;
+  id?: number;
 }
 
-const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
+const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
   const campaign = useCampaign();
   const navigate = useNavigate();
 
@@ -40,17 +41,17 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
   });
 
   useEffect(() => {
-    getFormIngredient(formIngredient)
-  }, [formIngredient])
+    getFormIngredient(formIngredient);
+  }, [formIngredient]);
 
   const handleClick = () => {
     campaign.setCampaign({
       ...campaign.campaign,
       targetGroups: campaign.campaign.targetGroups.map((group, index) =>
-        index === campaign.campaign.targetGroups.length - 1
+        group.id === id
           ? {
               ...group,
-              ads: [
+              ads: group.ads.slice(0).concat([
                 {
                   id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
                   caption: formIngredient.caption,
@@ -73,9 +74,37 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                   bgColor: formIngredient.bgColor,
                   media: 'bildadress',
                 },
-              ],
+              ]),
             }
-          : group,
+          : index === campaign.campaign.targetGroups.length - 1
+          ? {
+            ...group,
+            ads: group.ads.slice(0).concat([
+              {
+                  id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+                  caption: formIngredient.caption,
+                  description: formIngredient.description,
+                  adType: 'INGREDIENT',
+                  category: formIngredient.category,
+                  dietaryPreferences: {
+                    vegetarian: formIngredient.dietaryPreferences.vegetarian,
+                    vegan: formIngredient.dietaryPreferences.vegan,
+                    dairy: formIngredient.dietaryPreferences.dairy,
+                    nuts: formIngredient.dietaryPreferences.nuts,
+                    gluten: formIngredient.dietaryPreferences.gluten,
+                  },
+                  nutritionValues: formIngredient.nutritionValues,
+                  emission: { totalFootprint: formIngredient.emission.totalFootprint },
+                  weight: {
+                    gramsPerPiece: formIngredient.weight.gramsPerPiece,
+                    gramsPerPackage: formIngredient.weight.gramsPerPackage,
+                  },
+                  bgColor: formIngredient.bgColor,
+                  media: 'bildadress',
+                },
+              ]),
+            }
+          : { ...group }
       ),
     });
 
@@ -84,6 +113,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
   };
 
   const handleMediaUpload = () => {
+    setFormIngredient({ ...formIngredient, media: '../assets/BannerImage.png'})
     console.log('Media uppladdning');
   };
 
@@ -133,84 +163,84 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
               onChange={(e) => setFormIngredient({ ...formIngredient, category: e.target.value })}
             ></DropDown>
             <MiniSection>
-            <Default style={{ paddingBottom: 5 }}>Specialkost</Default>
-            <Section>
-              <CheckboxButton
-                onChange={() =>
-                  setFormIngredient({
-                    ...formIngredient,
-                    dietaryPreferences: {
-                      vegetarian: !formIngredient.dietaryPreferences.vegetarian,
-                      vegan: formIngredient.dietaryPreferences.vegan,
-                      dairy: formIngredient.dietaryPreferences.dairy,
-                      nuts: formIngredient.dietaryPreferences.nuts,
-                      gluten: formIngredient.dietaryPreferences.gluten,
-                    },
-                  })
-                }
-                option1="Vegetarisk"
-              ></CheckboxButton>
-              <CheckboxButton
-                onChange={() =>
-                  setFormIngredient({
-                    ...formIngredient,
-                    dietaryPreferences: {
-                      vegetarian: formIngredient.dietaryPreferences.vegetarian,
-                      vegan: !formIngredient.dietaryPreferences.vegan,
-                      dairy: formIngredient.dietaryPreferences.dairy,
-                      nuts: formIngredient.dietaryPreferences.nuts,
-                      gluten: formIngredient.dietaryPreferences.gluten,
-                    },
-                  })
-                }
-                option1="Vegansk"
-              ></CheckboxButton>
-              <CheckboxButton
-                onChange={() =>
-                  setFormIngredient({
-                    ...formIngredient,
-                    dietaryPreferences: {
-                      vegetarian: formIngredient.dietaryPreferences.vegetarian,
-                      vegan: formIngredient.dietaryPreferences.vegan,
-                      dairy: !formIngredient.dietaryPreferences.dairy,
-                      nuts: formIngredient.dietaryPreferences.nuts,
-                      gluten: formIngredient.dietaryPreferences.gluten,
-                    },
-                  })
-                }
-                option1="Laktosfri"
-              ></CheckboxButton>
-              <CheckboxButton
-                onChange={() =>
-                  setFormIngredient({
-                    ...formIngredient,
-                    dietaryPreferences: {
-                      vegetarian: formIngredient.dietaryPreferences.dairy,
-                      vegan: formIngredient.dietaryPreferences.vegan,
-                      dairy: formIngredient.dietaryPreferences.dairy,
-                      nuts: !formIngredient.dietaryPreferences.nuts,
-                      gluten: formIngredient.dietaryPreferences.gluten,
-                    },
-                  })
-                }
-                option1="Nötfri"
-              ></CheckboxButton>
-              <CheckboxButton
-                onChange={() =>
-                  setFormIngredient({
-                    ...formIngredient,
-                    dietaryPreferences: {
-                      vegetarian: formIngredient.dietaryPreferences.dairy,
-                      vegan: formIngredient.dietaryPreferences.vegan,
-                      dairy: formIngredient.dietaryPreferences.dairy,
-                      nuts: formIngredient.dietaryPreferences.nuts,
-                      gluten: !formIngredient.dietaryPreferences.gluten,
-                    },
-                  })
-                }
-                option1="Glutenfri"
-              ></CheckboxButton>
-            </Section>
+              <Default style={{ paddingBottom: 5 }}>Specialkost</Default>
+              <Section>
+                <CheckboxButton
+                  onChange={() =>
+                    setFormIngredient({
+                      ...formIngredient,
+                      dietaryPreferences: {
+                        vegetarian: !formIngredient.dietaryPreferences.vegetarian,
+                        vegan: formIngredient.dietaryPreferences.vegan,
+                        dairy: formIngredient.dietaryPreferences.dairy,
+                        nuts: formIngredient.dietaryPreferences.nuts,
+                        gluten: formIngredient.dietaryPreferences.gluten,
+                      },
+                    })
+                  }
+                  option1="Vegetarisk"
+                ></CheckboxButton>
+                <CheckboxButton
+                  onChange={() =>
+                    setFormIngredient({
+                      ...formIngredient,
+                      dietaryPreferences: {
+                        vegetarian: formIngredient.dietaryPreferences.vegetarian,
+                        vegan: !formIngredient.dietaryPreferences.vegan,
+                        dairy: formIngredient.dietaryPreferences.dairy,
+                        nuts: formIngredient.dietaryPreferences.nuts,
+                        gluten: formIngredient.dietaryPreferences.gluten,
+                      },
+                    })
+                  }
+                  option1="Vegansk"
+                ></CheckboxButton>
+                <CheckboxButton
+                  onChange={() =>
+                    setFormIngredient({
+                      ...formIngredient,
+                      dietaryPreferences: {
+                        vegetarian: formIngredient.dietaryPreferences.vegetarian,
+                        vegan: formIngredient.dietaryPreferences.vegan,
+                        dairy: !formIngredient.dietaryPreferences.dairy,
+                        nuts: formIngredient.dietaryPreferences.nuts,
+                        gluten: formIngredient.dietaryPreferences.gluten,
+                      },
+                    })
+                  }
+                  option1="Laktosfri"
+                ></CheckboxButton>
+                <CheckboxButton
+                  onChange={() =>
+                    setFormIngredient({
+                      ...formIngredient,
+                      dietaryPreferences: {
+                        vegetarian: formIngredient.dietaryPreferences.dairy,
+                        vegan: formIngredient.dietaryPreferences.vegan,
+                        dairy: formIngredient.dietaryPreferences.dairy,
+                        nuts: !formIngredient.dietaryPreferences.nuts,
+                        gluten: formIngredient.dietaryPreferences.gluten,
+                      },
+                    })
+                  }
+                  option1="Nötfri"
+                ></CheckboxButton>
+                <CheckboxButton
+                  onChange={() =>
+                    setFormIngredient({
+                      ...formIngredient,
+                      dietaryPreferences: {
+                        vegetarian: formIngredient.dietaryPreferences.dairy,
+                        vegan: formIngredient.dietaryPreferences.vegan,
+                        dairy: formIngredient.dietaryPreferences.dairy,
+                        nuts: formIngredient.dietaryPreferences.nuts,
+                        gluten: !formIngredient.dietaryPreferences.gluten,
+                      },
+                    })
+                  }
+                  option1="Glutenfri"
+                ></CheckboxButton>
+              </Section>
             </MiniSection>
             <MiniSection>
               <Default style={{ paddingBottom: 5 }}>Näringsvärden</Default>
@@ -271,25 +301,28 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                 required={true}
               ></TextInputField>
             </MiniSection>
-            <PrimaryButton
-              onClick={handleMediaUpload}
-              title="Ladda upp media"
-              disabled={false}
-              inHeader={false}
-              width={204}
-              icon={<PhotoOutlinedIcon style={{ color: Colors.kurr_white, fontSize: 'large' }} />}
-            />
             <MiniSection>
-            <Default style={{ paddingBottom: 5 }}>Bakgrundsfärg*</Default>
-            <ColorPicker
-              value={formIngredient.bgColor}
-              onChange={(e) =>
-                setFormIngredient({
-                  ...formIngredient,
-                  bgColor: e.target.value,
-                })
-              }
-            ></ColorPicker>
+              <Default style={{ paddingBottom: 5 }}>Bild*</Default>
+              <PrimaryButton
+                onClick={handleMediaUpload}
+                title="Ladda upp media"
+                disabled={false}
+                inHeader={false}
+                width={204}
+                icon={<PhotoOutlinedIcon style={{ color: Colors.kurr_white, fontSize: 'large' }} />}
+              />
+            </MiniSection>
+            <MiniSection>
+              <Default style={{ paddingBottom: 5 }}>Bakgrundsfärg*</Default>
+              <ColorPicker
+                value={formIngredient.bgColor}
+                onChange={(e) =>
+                  setFormIngredient({
+                    ...formIngredient,
+                    bgColor: e.target.value,
+                  })
+                }
+              ></ColorPicker>
             </MiniSection>
           </FormContent>
         </form>

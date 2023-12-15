@@ -7,44 +7,51 @@ import DropDown from './DropDown';
 import ColorPicker from './ColorPicker';
 import PrimaryButton from './buttons/PrimaryButton';
 import styled from 'styled-components';
-
+import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
+import Colors from '../styles/Colors';
 
 interface BannerProps {
-  getFormBanner: any
+  getFormBanner: any;
+  id?: number;
 }
 
-const Banner: React.FC<BannerProps> = ({ getFormBanner }) => {
+const Banner: React.FC<BannerProps> = ({ getFormBanner, id }) => {
   const campaign = useCampaign();
   const navigate = useNavigate();
 
   const [formBanner, setFormBanner] = useState({
     id: 0,
-    caption: '',
-    description: '',
-    mediaUrl: '',
-    media: '',
+    caption: ' ',
+    description: ' ',
+    mediaUrl: ' ',
+    media: ' ',
     adType: 'BANNER',
-    button: { link: '', buttonText: '', buttonColor: '#262626' },
+    button: { link: ' ', buttonText: ' ', buttonColor: '#262626' },
   });
 
   useEffect(() => {
-    getFormBanner(formBanner)
-  }, [formBanner])
+    getFormBanner(formBanner);
+  }, [formBanner]);
+
+  const handleMediaUpload = () => {
+    setFormBanner({ ...formBanner, media: 'https://www.bockholmengruppen.com/wp-content/uploads/2020/12/Ingrediens.jpg' });
+    console.log('Media uppladdning');
+  };
 
   const handleClick = () => {
     campaign.setCampaign({
       ...campaign.campaign,
       targetGroups: campaign.campaign.targetGroups.map((group, index) =>
-        index === campaign.campaign.targetGroups.length - 1
+        group.id === id
           ? {
               ...group,
-              ads: [
+              ads: group.ads.slice(0).concat([
                 {
                   id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
                   caption: formBanner.caption,
                   description: formBanner.description,
                   mediaUrl: formBanner.mediaUrl,
-                  media: 'bildadress',
+                  media: formBanner.media,
                   adType: 'BANNER',
                   button: {
                     link: formBanner.button.link,
@@ -52,11 +59,31 @@ const Banner: React.FC<BannerProps> = ({ getFormBanner }) => {
                     buttonColor: formBanner.button.buttonColor,
                   },
                 },
-              ],
+              ]),
             }
-          : group,
+          : index === campaign.campaign.targetGroups.length - 1
+          ? {
+              ...group,
+              ads: group.ads.slice(0).concat([
+                {
+                  id: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+                  caption: formBanner.caption,
+                  description: formBanner.description,
+                  mediaUrl: formBanner.mediaUrl,
+                  media: formBanner.media,
+                  adType: 'BANNER',
+                  button: {
+                    link: formBanner.button.link,
+                    buttonText: formBanner.button.buttonText,
+                    buttonColor: formBanner.button.buttonColor,
+                  },
+                },
+              ]),
+            }
+          : { ...group }
       ),
     });
+  
     navigate('/PreviewPage');
   };
 
@@ -90,12 +117,14 @@ const Banner: React.FC<BannerProps> = ({ getFormBanner }) => {
             </MiniSection>
             <MiniSection>
               <Default style={{ paddingBottom: 5 }}>Bild*</Default>
-              <TextInputField
-                onChange={(e) => setFormBanner({ ...formBanner, mediaUrl: e.target.value })}
-                value={formBanner.mediaUrl}
+              <PrimaryButton
+                onClick={handleMediaUpload}
+                title="Ladda upp media"
                 disabled={false}
-                required={true}
-              ></TextInputField>
+                inHeader={false}
+                width={204}
+                icon={<PhotoOutlinedIcon style={{ color: Colors.kurr_white, fontSize: 'large' }} />}
+              />
             </MiniSection>
             <MiniSection>
               <Default style={{ paddingBottom: 5 }}>Länk*</Default>
