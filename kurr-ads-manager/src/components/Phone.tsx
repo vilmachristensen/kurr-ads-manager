@@ -112,6 +112,7 @@ const Phone: React.FC<IPhoneFrameProps> = ({
                 </StatusBar>
                 <Default style={{ textAlign: 'center', color: Colors.white }}>{ad.caption}</Default>
               </TopSection>
+
               <BottomSection adType={adType}>
                 <BottomBar>
                   <Left>
@@ -158,6 +159,8 @@ const Phone: React.FC<IPhoneFrameProps> = ({
 };
 
 const Screen = styled.div<{ image?: string }>`
+display: grid;
+  grid-template-rows: auto 1fr auto;
   width: 250px;
   height: 521px;
   background: ${Colors.kurr_primary_piglet_peach};
@@ -165,6 +168,7 @@ const Screen = styled.div<{ image?: string }>`
   border-radius: 34px;
   overflow: hidden;
   padding: 20px;
+
   border: 10px solid #000;
   border-radius: 50px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
@@ -204,12 +208,12 @@ const BottomBar = styled.div`
 `;
 
 const BottomSection = styled.div<{ adType?: string }>`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  top: ${(props) => (props.adType === 'BANNER' ? '55%' : '65%')};
-  gap: 16px;
+display: flex;
+flex-direction: column;
+gap: 16px;
 `;
+
+{/**   position: relative; top: ${(props) => (props.adType === 'BANNER' ? '55%' : '65%')}; */}
 
 const Left = styled.div`
   display: flex;

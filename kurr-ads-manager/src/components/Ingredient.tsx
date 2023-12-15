@@ -140,7 +140,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                   setFormIngredient({
                     ...formIngredient,
                     dietaryPreferences: {
-                      vegetarian: !false,
+                      vegetarian: !formIngredient.dietaryPreferences.vegetarian,
                       vegan: formIngredient.dietaryPreferences.vegan,
                       dairy: formIngredient.dietaryPreferences.dairy,
                       nuts: formIngredient.dietaryPreferences.nuts,
@@ -156,7 +156,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                     ...formIngredient,
                     dietaryPreferences: {
                       vegetarian: formIngredient.dietaryPreferences.vegetarian,
-                      vegan: !false,
+                      vegan: !formIngredient.dietaryPreferences.vegan,
                       dairy: formIngredient.dietaryPreferences.dairy,
                       nuts: formIngredient.dietaryPreferences.nuts,
                       gluten: formIngredient.dietaryPreferences.gluten,
@@ -172,7 +172,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                     dietaryPreferences: {
                       vegetarian: formIngredient.dietaryPreferences.vegetarian,
                       vegan: formIngredient.dietaryPreferences.vegan,
-                      dairy: !false,
+                      dairy: !formIngredient.dietaryPreferences.dairy,
                       nuts: formIngredient.dietaryPreferences.nuts,
                       gluten: formIngredient.dietaryPreferences.gluten,
                     },
@@ -188,7 +188,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                       vegetarian: formIngredient.dietaryPreferences.dairy,
                       vegan: formIngredient.dietaryPreferences.vegan,
                       dairy: formIngredient.dietaryPreferences.dairy,
-                      nuts: !false,
+                      nuts: !formIngredient.dietaryPreferences.nuts,
                       gluten: formIngredient.dietaryPreferences.gluten,
                     },
                   })
@@ -204,7 +204,7 @@ const Ingredient: React.FC<IngredientProps> = ({getFormIngredient }) => {
                       vegan: formIngredient.dietaryPreferences.vegan,
                       dairy: formIngredient.dietaryPreferences.dairy,
                       nuts: formIngredient.dietaryPreferences.nuts,
-                      gluten: !false,
+                      gluten: !formIngredient.dietaryPreferences.gluten,
                     },
                   })
                 }
