@@ -19,10 +19,18 @@ interface DropDownProps {
   inHeader: boolean;
   menuItems: MenuItem[];
   onChange?: (event: SelectChangeEvent) => void; // La till denna för banner komponenten
-  value?: string // La till denna för banner komponenten
+  value?: string; // La till denna för banner komponenten
 }
 
-const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inHeader, onChange, value }) => {
+const DropDown: React.FC<DropDownProps> = ({
+  title,
+  label,
+  width,
+  menuItems,
+  inHeader,
+  onChange,
+  value,
+}) => {
   const [state, setState] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -38,8 +46,14 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
       <Textstyle>
         {inHeader === true ? <Tertiary_text>{title}</Tertiary_text> : <Default>{title}</Default>}
       </Textstyle>
-     
-      <FormControl sx={{ m: 1, width: 'inherit', bgcolor: Colors.white}}>
+
+      <FormControl
+        sx={{
+          m: 1,
+          width: 'inherit',
+          bgcolor: Colors.white,
+        }}
+      >
         <Select
           sx={{
             color: Colors.kurr_black,
@@ -76,28 +90,31 @@ const DropDown: React.FC<DropDownProps> = ({ title, label, width, menuItems, inH
             },
           }}
         >
-          <MenuItem style={{gap: 5}} disabled value="">
-            {menuItems[0].icon}
-            {inHeader === true ? (
-              <Tertiary_text>{menuItems[0].item}</Tertiary_text>
-            ) : (
-              <Default>{menuItems[0].item}</Default>
-            )}
+          <MenuItem style={{ gap: 5 }} disabled value="">
+            <div style={{ display: 'flex', alignSelf: 'center', gap: 5 }}>
+              {menuItems[0].icon}
+              {inHeader === true ? (
+                <Tertiary_text>{menuItems[0].item}</Tertiary_text>
+              ) : (
+                <Default>{menuItems[0].item}</Default>
+              )}
+            </div>
           </MenuItem>
           {menuItems.map((item) => (
-            <MenuItem style={{gap: 5}}key={item.item} value={item.item}>
+            <MenuItem key={item.item} value={item.item}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
               {item.icon}
               {inHeader === true ? (
                 <Tertiary_text>{item.item}</Tertiary_text>
               ) : (
                 <Default>{item.item}</Default>
               )}
+              </div>
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      </div>
-
+    </div>
   );
 };
 
