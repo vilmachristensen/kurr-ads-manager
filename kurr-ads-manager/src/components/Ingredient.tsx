@@ -10,6 +10,7 @@ import ColorPicker from './ColorPicker';
 import CheckboxButton from './buttons/CheckboxButton';
 import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
 import Colors from '../styles/Colors';
+import Banana from '../assets/banana.png';
 
 interface IngredientProps {
   getFormIngredient: any;
@@ -72,7 +73,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
                     gramsPerPackage: formIngredient.weight.gramsPerPackage,
                   },
                   bgColor: formIngredient.bgColor,
-                  media: 'bildadress',
+                  media: formIngredient.media,
                 },
               ]),
             }
@@ -100,7 +101,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
                     gramsPerPackage: formIngredient.weight.gramsPerPackage,
                   },
                   bgColor: formIngredient.bgColor,
-                  media: 'bildadress',
+                  media: formIngredient.media,
                 },
               ]),
             }
@@ -113,8 +114,8 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
   };
 
   const handleMediaUpload = () => {
-    setFormIngredient({ ...formIngredient, media: '../assets/BannerImage.png'})
-    console.log('Media uppladdning');
+    setFormIngredient({ ...formIngredient, media: Banana})
+    console.log('Media uppladdning', formIngredient.media);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

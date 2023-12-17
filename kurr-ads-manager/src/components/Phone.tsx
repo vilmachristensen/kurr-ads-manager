@@ -58,7 +58,7 @@ const thisAd = getLastAd();
     <div>
       {(formBanner || formIngredient) !== undefined ? (
         <div>
-          <Screen image={formBanner.media}>
+         <Screen image={formBanner.media || formIngredient.media} bgColor={formIngredient.bgColor}>
             <TopBar />
             <TopSection>
               <StatusBar>
@@ -116,7 +116,8 @@ const thisAd = getLastAd();
         </div>
       ) : (
         <div>
-            <Screen image={image}>
+          {/** Fixa så det blir thisAd.bgColor som syns */}
+            <Screen image={thisAd.media} bgColor='#000'>
               <TopBar />
               <TopSection>
                 <StatusBar>
@@ -170,13 +171,14 @@ const thisAd = getLastAd();
   );
 };
 
-const Screen = styled.div<{ image?: string }>`
+const Screen = styled.div<{ image?: string, bgColor?: string }>` 
   display: grid;
   grid-template-rows: auto 1fr auto;
   width: 250px;
   height: 521px;
-  background: ${Colors.kurr_white};
-  background-image: 'url(${(props) => (props.image) || ''})';
+  background-color: ${(props) => props.bgColor || Colors.grey_25 };
+  background-image: ${(props) => (props.image ? `url(${props.image})` : 'none')};
+  background-size: contain;
   border-radius: 34px;
   overflow: hidden;
   padding: 20px;

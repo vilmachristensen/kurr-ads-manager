@@ -9,6 +9,7 @@ import PrimaryButton from './buttons/PrimaryButton';
 import styled from 'styled-components';
 import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
 import Colors from '../styles/Colors';
+import Felix from '../assets/Felix.png';
 
 interface BannerProps {
   getFormBanner: any;
@@ -34,8 +35,8 @@ const Banner: React.FC<BannerProps> = ({ getFormBanner, id }) => {
   }, [formBanner]);
 
   const handleMediaUpload = () => {
-    setFormBanner({ ...formBanner, media: 'https://www.bockholmengruppen.com/wp-content/uploads/2020/12/Ingrediens.jpg' });
-    console.log('Media uppladdning');
+    setFormBanner({ ...formBanner, media: Felix });
+    console.log('Media uppladdning', formBanner.media);
   };
 
   const handleClick = () => {

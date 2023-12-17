@@ -124,7 +124,7 @@ const PreviewPage: React.FC = () => {
               <AdSection>
                 {group.ads.map((ad) => (
                   <div style={{display:"flex", flexDirection: "column", gap:20, width:"auto"}}>
-                    <Ad>{ad.media}</Ad>
+                    <Ad image={ad.media} bgColor='#000'></Ad>
                     <DetailSection>
                       <Default_medium>Annonstyp</Default_medium>
                       {ad.adType === 'INGREDIENT' ? (
@@ -276,12 +276,14 @@ const AdSection = styled.div`
   align-items: center;
 `;
 
-const Ad = styled.div`
+const Ad = styled.div<{ image?: string, bgColor?: string  }>`
   width: 85px;
   height: 184px;
   border-radius: 4px;
   border: 1px dashed ${Colors.grey_25};
-  background-color: ${Colors.white};
+  background-color: ${(props) => props.bgColor || Colors.grey_25 };
+  background-image: ${(props) => (props.image ? `url(${props.image})` : 'none')};
+  background-size: contain;
 `;
 
 const TargetGroupSection = styled.div`
