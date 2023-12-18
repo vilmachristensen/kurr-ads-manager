@@ -10,6 +10,7 @@ interface TextInputFieldProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
   required?: boolean;
+  rows?: number;
 }
 
 const TextInputField: React.FC<TextInputFieldProps> = ({
@@ -18,30 +19,11 @@ const TextInputField: React.FC<TextInputFieldProps> = ({
   onChange,
   value,
   required,
+  rows,
 }) => {
+
   return disabled ? (
-    <TextField
-      sx={{
-        root: {
-          '& label.Mui-focused': {
-            color: 'white',
-          },
-          '& .MuiInput-underline:after': {
-            borderBottomColor: 'white',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: 'white',
-            },
-            '&:hover fieldset': {
-              borderColor: 'white',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'white',
-            },
-          },
-        },
-      }}
+    <StyledTextField
       style={{ width: 'inherit', backgroundColor:`${Colors.white}` }}
       disabled
       id="outlined-basic"
@@ -49,19 +31,48 @@ const TextInputField: React.FC<TextInputFieldProps> = ({
       variant="outlined"
       InputLabelProps={{ shrink: true }}
       required={required}
+      multiline
+      rows={rows}
       onChange={(e) => onChange(e as React.ChangeEvent<HTMLInputElement>)}
     />
   ) : (
-    <TextField
+    <StyledTextField
       style={{ width: 'inherit', backgroundColor: `${Colors.white}` }}
       id="outlined-basic"
       label={label}
       variant="outlined"
       InputLabelProps={{ shrink: true }}
       required={required}
+      multiline
+      rows={rows}
       onChange={(e) => onChange(e as React.ChangeEvent<HTMLInputElement>)}
     />
   );
 };
 
 export default TextInputField;
+
+const StyledTextField = styled(TextField)`
+  width: inherit;
+  background-color: ${Colors.white};
+
+  & label.Mui-focused {
+    color: white;
+  }
+
+  & .MuiInput-underline:after {
+    border-bottom-color: white;
+  }
+
+  & .MuiOutlinedInput-root {
+    & fieldset {
+      border-color: ${Colors.grey_20};
+    }
+    &:hover fieldset {
+      border-color: ${Colors.grey_45};
+    }
+    &.Mui-focused fieldset {
+      border-color: ${Colors.grey_45};
+    }
+  }
+`;

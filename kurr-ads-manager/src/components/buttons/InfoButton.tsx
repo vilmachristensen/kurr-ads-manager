@@ -13,7 +13,7 @@ const InfoButton: React.FC<InfoButtonProps> = ({ title, description }) => {
   const [isHover, setIsHover] = useState(false);
 
   return (
-    <div style={{position:"absolute"}}>
+    <div style={{position:"absolute", cursor: "pointer"}}>
       <Info onMouseOver={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
         <InfoOutlinedIcon />
       </Info>

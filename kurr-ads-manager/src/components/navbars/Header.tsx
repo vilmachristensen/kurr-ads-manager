@@ -26,14 +26,14 @@ const Header: React.FC = () => {
       </Logo>
       <Menu>
         <DropDown
-          label={'El Taco Truck'}
+          label={'Felix'}
           width={206}
           inHeader={true}
           menuItems={[
+            { item: 'Felix', icon: <img src={Felix} width={24} height={24} alt=""/> },
             { item: 'El Taco Truck', icon: <img src={ElTacoTruck} width={24} height={24} alt=""/> },
             { item: 'Jävligt Gott', icon: <img src={JavligtGott} width={24} height={24} alt=""/> },
             { item: 'Västerbottensost', icon: <img src={Vasterbotten} width={24} height={24} alt=""/> },
-            { item: 'Felix', icon: <img src={Felix} width={24} height={24} alt=""/> },
           ]}
         />
         <DropDown
@@ -75,8 +75,11 @@ const GridContainer = styled.div`
   padding-top: 1%;
   padding-left: 5%;
   padding-right: 5%;
-  padding-bottom: 3%;
+  padding-bottom: 1%;
   background-color: ${Colors.kurr_white};
+  width: 90vw;
+  position: fixed;
+  z-index: 2;
 `;
 
 const Menu = styled.div`

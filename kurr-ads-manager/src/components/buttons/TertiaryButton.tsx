@@ -33,6 +33,7 @@ const Tertiary = styled.button`
     opacity: 0.7;
   }
   gap: 5px;
+  cursor: pointer;
 `;
 
 export default TertiaryButton;

@@ -8,11 +8,15 @@ import styled from 'styled-components';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SecondaryButton from '../components/buttons/SecondaryButton';
 
-const handleClick = () => {
-  console.log('Gå till kampanjöversikt');
-};
-
 const ConfirmationPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleClick = (type: string) => {
+    {
+      type === 'Kampanjöversikt' ? console.log('Gå till kampanjöversikt') : navigate('/');
+    }
+  };
+
   return (
     <Grid>
       <Content>
@@ -26,10 +30,13 @@ const ConfirmationPage: React.FC = () => {
             inHeader={false}
             disabled={false}
             width={169}
-            onClick={handleClick}
+            onClick={() => handleClick('Översikt')}
           ></PrimaryButton>
         </Buttons>
-        <SecondaryButton title="Skapa fler kampanjer"></SecondaryButton>
+        <SecondaryButton
+          onClick={() => handleClick('Kampanj')}
+          title="Skapa fler kampanjer"
+        ></SecondaryButton>
       </Content>
     </Grid>
   );

@@ -20,7 +20,7 @@ const Layout = styled.div`
 `;
 
 const Content = styled.div`
-  padding-top: 3%;
+  padding-top: 17%;
 `;
 
 const PageContainer = styled.div`

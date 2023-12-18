@@ -110,6 +110,7 @@ const NavBar = styled.div`
     gap: 6px;
     padding-left:5%;
     position: fixed;
+    padding-top: 10%;
 }`;
 
 const Items = styled.div<{ active: boolean }>`

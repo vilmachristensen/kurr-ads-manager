@@ -4,7 +4,7 @@ import statusBar from '../../src/assets/StatusBar.svg';
 import { Default, Menu, Mini_text } from '../styles/Text';
 import Colors from '../../src/styles/Colors';
 import Checkmark from '../../src/assets/Checkmark.svg';
-import ElTacoTruck from '../../src/assets/ElTacoTruck_logo.png';
+import Felix from '../../src/assets/Felix_logo.png';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { useCampaign } from '../state/Context';
 
@@ -41,30 +41,30 @@ const Phone: React.FC<IPhoneFrameProps> = ({
 
   const getArrayLength = (type: string) => {
     let length = campaign.campaign.targetGroups.length - 1;
-    return type === "targetGroup"
-      ? (length)
+    return type === 'targetGroup'
+      ? length
       : (length = campaign.campaign.targetGroups[length].ads.length - 1);
   };
 
+  const getLastAd = () => {
+    const lastAd =
+      campaign.campaign.targetGroups[getArrayLength('targetGroup')].ads[getArrayLength('ads')];
+    return lastAd;
+  };
 
-const getLastAd = () => {
-  const lastAd = campaign.campaign.targetGroups[getArrayLength("targetGroup")].ads[getArrayLength("ads")];
-  return lastAd;
-};
-
-const thisAd = getLastAd();
+  const thisAd = getLastAd();
 
   return (
     <div>
       {(formBanner || formIngredient) !== undefined ? (
         <div>
-          <Screen image={formBanner.media}>
+          <Screen image={formBanner.media || formIngredient.media} bgColor={formIngredient.bgColor}>
             <TopBar />
             <TopSection>
               <StatusBar>
                 <img src={statusBar} width={280} alt="" />
               </StatusBar>
-              <Default style={{ textAlign: 'center', color: Colors.white }}>
+              <Default style={{ textAlign: 'center', color: Colors.kurr_black }}>
                 {(formBanner && formBanner.caption) || (formIngredient && formIngredient.caption)}
               </Default>
             </TopSection>
@@ -72,7 +72,7 @@ const thisAd = getLastAd();
               <BottomBar>
                 <Left>
                   <Profile>
-                    <img src={ElTacoTruck} width={24} alt="" />
+                    <img src={Felix} width={24} alt="" />
                     <Mini_text>{profile}</Mini_text>
                   </Profile>
                   <Mini_text>
@@ -116,67 +116,73 @@ const thisAd = getLastAd();
         </div>
       ) : (
         <div>
-            <Screen image={image}>
-              <TopBar />
-              <TopSection>
-                <StatusBar>
-                  <img src={statusBar} width={280} alt="" />
-                </StatusBar>
-                <Default style={{ textAlign: 'center', color: Colors.white }}>{thisAd.caption}</Default>
-              </TopSection>
+          <Screen
+            image={thisAd.media}
+            bgColor={thisAd.adType === 'INGREDIENT' ? thisAd.bgColor : Colors.grey_20}
+          >
+            <TopBar />
+            <TopSection>
+              <StatusBar>
+                <img src={statusBar} width={280} alt="" />
+              </StatusBar>
+              <Default style={{ textAlign: 'center', color: Colors.kurr_black }}>
+                {thisAd.caption}
+              </Default>
+            </TopSection>
 
-              <BottomSection adType={adType}>
-                <BottomBar>
-                  <Left>
-                    <Profile>
-                      <img src={ElTacoTruck} width={24} alt="" />
-                      <Mini_text>{profile}</Mini_text>
-                    </Profile>
-                    <Mini_text>{thisAd.description}</Mini_text>
-                  </Left>
+            <BottomSection adType={adType}>
+              <BottomBar>
+                <Left>
+                  <Profile>
+                    <img src={Felix} width={24} alt="" />
+                    <Mini_text>{profile}</Mini_text>
+                  </Profile>
+                  <Mini_text>{thisAd.description}</Mini_text>
+                </Left>
 
-                  {adType && thisAd.adType === 'INGREDIENT' ? (
-                    <Right>
-                      <Emission>
-                        <Menu>{thisAd.emission?.totalFootprint}</Menu>
-                        <Mini_text>CO2e</Mini_text>
-                      </Emission>
-                      <DietaryPreferences>
-                        <img src={Checkmark} width={52} alt="" />
-                        {thisAd.dietaryPreferences?.vegetarian && <Mini_text>Vegetariskt</Mini_text>}
-                        {thisAd.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
-                        {thisAd.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
-                        {thisAd.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
-                        {thisAd.dietaryPreferences?.gluten && <Mini_text>Glutenfri</Mini_text>}
-                      </DietaryPreferences>
-                    </Right>
-                  ) : null}
-                </BottomBar>
-                {adType && thisAd.adType === 'BANNER' ? (
-                  <Button
-                    buttonColor={thisAd.button.buttonColor}
-                    //onClick={() => handleLink(thisAd.button.buttonLink)}
-                  >
-                    <Menu style={{ color: Colors.white }}>{thisAd.button.buttonText}</Menu>
-                    <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
-                  </Button>
+                {thisAd.adType === 'INGREDIENT' ? (
+                  <Right>
+                    <Emission>
+                      <Menu>{thisAd.emission?.totalFootprint}</Menu>
+                      <Mini_text>CO2e</Mini_text>
+                    </Emission>
+                    <DietaryPreferences>
+                      <img src={Checkmark} width={52} alt="" />
+                      {thisAd.dietaryPreferences?.vegetarian && <Mini_text>Vegetariskt</Mini_text>}
+                      {thisAd.dietaryPreferences?.vegan && <Mini_text>Veganskt</Mini_text>}
+                      {thisAd.dietaryPreferences?.dairy && <Mini_text>Laktosfri</Mini_text>}
+                      {thisAd.dietaryPreferences?.nuts && <Mini_text>Nötfri</Mini_text>}
+                      {thisAd.dietaryPreferences?.gluten && <Mini_text>Glutenfri</Mini_text>}
+                    </DietaryPreferences>
+                  </Right>
                 ) : null}
-              </BottomSection>
-            </Screen>
-          
+              </BottomBar>
+              {thisAd.adType === 'BANNER' ? (
+                <Button
+                  buttonColor={thisAd.button.buttonColor}
+                  onClick={() => handleLink(thisAd.button.link)}
+                >
+                  <Menu style={{ color: Colors.white }}>{thisAd.button.buttonText}</Menu>
+                  <ArrowForwardIosRoundedIcon fontSize="small" style={{ color: Colors.white }} />
+                </Button>
+              ) : null}
+            </BottomSection>
+          </Screen>
         </div>
       )}
     </div>
   );
 };
 
-const Screen = styled.div<{ image?: string }>`
+const Screen = styled.div<{ image?: string; bgColor?: string }>`
   display: grid;
   grid-template-rows: auto 1fr auto;
   width: 250px;
   height: 521px;
-  background: ${Colors.kurr_white};
-  background-image: 'url(${(props) => (props.image) || ''})';
+  background-color: ${(props) => props.bgColor || Colors.grey_25};
+  background-image: ${(props) => (props.image ? `url(${props.image})` : 'none')};
+  background-size: cover;
+
   border-radius: 34px;
   overflow: hidden;
   padding: 20px;
@@ -276,6 +282,7 @@ const Button = styled.button<{ buttonColor?: string }>`
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
+  cursor: pointer;
 `;
 
 export default Phone;

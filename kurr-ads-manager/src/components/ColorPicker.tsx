@@ -6,13 +6,14 @@ import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 import Colors from '../styles/Colors';
 
 interface ColorPickerProps {
-  onChange?: (color: { target: { value: string } }) => void; // La till denna för banner komponenten
-  value?: string; // La till denna för banner komponenten
+  onChange?: (color: { target: { value: string } }) => void;
+  value?: string;
+  adType: string;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ onChange, value }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({ onChange, value, adType }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
-  const [selectedColor, setSelectedColor] = useState<string>(Colors.kurr_black);
+  const [selectedColor, setSelectedColor] = useState<string>(adType === "BANNER" ? Colors.kurr_black : Colors.grey_20);
 
   const handleClick = () => {
     setDisplayColorPicker((prevDisplay) => !prevDisplay);

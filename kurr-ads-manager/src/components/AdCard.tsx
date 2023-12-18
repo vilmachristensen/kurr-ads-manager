@@ -48,6 +48,7 @@ const GridContainer = styled.div<{ isClicked: boolean }>`
   grid-template-columns: auto;
   gap: 30px;
   opacity: ${(props) => (props.isClicked === false ? 0.7 : 'none')};
+  cursor: pointer;
 `;
 
 const PictureArea = styled.img`

@@ -12,6 +12,8 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Colors from '../styles/Colors';
+import 'dayjs/locale/en-gb';
+
 
 const CampaignPage: React.FC = () => {
   const navigate = useNavigate();
@@ -50,7 +52,7 @@ const CampaignPage: React.FC = () => {
 
   return (
     <CampaignProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
         <Content>
           <form onSubmit={handleSubmit}>
             <FormContent>

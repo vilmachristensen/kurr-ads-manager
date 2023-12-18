@@ -10,6 +10,7 @@ import ColorPicker from './ColorPicker';
 import CheckboxButton from './buttons/CheckboxButton';
 import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
 import Colors from '../styles/Colors';
+import Ketchup from '../assets/Ketchup.png';
 
 interface IngredientProps {
   getFormIngredient: any;
@@ -36,7 +37,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
     nutritionValues: '',
     emission: { totalFootprint: 0 },
     weight: { gramsPerPiece: 0, gramsPerPackage: 0 },
-    bgColor: '#262626',
+    bgColor: Colors.grey_20,
     media: '',
   });
 
@@ -72,7 +73,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
                     gramsPerPackage: formIngredient.weight.gramsPerPackage,
                   },
                   bgColor: formIngredient.bgColor,
-                  media: 'bildadress',
+                  media: formIngredient.media,
                 },
               ]),
             }
@@ -100,7 +101,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
                     gramsPerPackage: formIngredient.weight.gramsPerPackage,
                   },
                   bgColor: formIngredient.bgColor,
-                  media: 'bildadress',
+                  media: formIngredient.media,
                 },
               ]),
             }
@@ -113,8 +114,8 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
   };
 
   const handleMediaUpload = () => {
-    setFormIngredient({ ...formIngredient, media: '../assets/BannerImage.png'})
-    console.log('Media uppladdning');
+    setFormIngredient({ ...formIngredient, media: Ketchup})
+    console.log('Media uppladdning', formIngredient.media);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -144,6 +145,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
                 }
                 value={formIngredient.description}
                 disabled={false}
+                rows={4}
                 required={true}
               ></TextInputField>
             </MiniSection>
@@ -316,6 +318,7 @@ const Ingredient: React.FC<IngredientProps> = ({ getFormIngredient, id }) => {
               <Default style={{ paddingBottom: 5 }}>Bakgrundsfärg*</Default>
               <ColorPicker
                 value={formIngredient.bgColor}
+                adType={formIngredient.adType}
                 onChange={(e) =>
                   setFormIngredient({
                     ...formIngredient,

@@ -104,7 +104,7 @@ const AdPage: React.FC = () => {
         <Preview>
           <Phone
             title={''}
-            profile={'El taco truck'}
+            profile={'Felix'}
             description={''}
             image={''}
             buttonText={''}
@@ -119,7 +119,7 @@ const AdPage: React.FC = () => {
         <Preview>
           <Phone
             title={''}
-            profile={'El taco truck'}
+            profile={'Felix'}
             description={''}
             image={''}
             adType="INGREDIENT"

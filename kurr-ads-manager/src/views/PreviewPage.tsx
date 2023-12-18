@@ -123,8 +123,21 @@ const PreviewPage: React.FC = () => {
               <Default_medium>Annonser</Default_medium>
               <AdSection>
                 {group.ads.map((ad) => (
-                  <div style={{display:"flex", flexDirection: "column", gap:20, width:"auto"}}>
-                    <Ad>{ad.media}</Ad>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 20,
+                      width: '90px',
+                      whiteSpace: "nowrap",
+                      overflow: 'hidden',
+                      msTextOverflow: "ellipsis"
+                    }}
+                  >
+                    <Ad
+                      image={ad.media}
+                      bgColor={ad.adType === 'INGREDIENT' ? ad.bgColor : Colors.kurr_white}
+                    ></Ad>
                     <DetailSection>
                       <Default_medium>Annonstyp</Default_medium>
                       {ad.adType === 'INGREDIENT' ? (
@@ -200,8 +213,14 @@ const PreviewPage: React.FC = () => {
                     )}
                   </div>
                 ))}
+                <Ad />
                 <AddCircleIcon
-                  style={{ paddingLeft: '10px', color: `${Colors.kurr_primary_piglet_peach}` }}
+                  style={{
+                    paddingLeft: '10px',
+                    color: `${Colors.kurr_primary_piglet_peach}`,
+                    paddingTop: '88px',
+                    cursor: "pointer"
+                  }}
                   onClick={() => handleClick('Ad')}
                 />
               </AdSection>
@@ -217,13 +236,7 @@ const PreviewPage: React.FC = () => {
         />
       </PreviewContent>
       <Preview>
-        <Phone
-          title={''}
-          profile={'El taco truck'}
-          description={''}
-          image={''}
-          adType="INGREDIENT"
-        />
+        <Phone title={''} profile={'El taco truck'} description={''} image={''} adType="" />
       </Preview>
     </Content>
   );
@@ -272,16 +285,18 @@ const DetailSection = styled.div`
 const AdSection = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  align-items: center;
+  gap: 30px;
+  align-items: flex-start;
 `;
 
-const Ad = styled.div`
+const Ad = styled.div<{ image?: string; bgColor?: string }>`
   width: 85px;
   height: 184px;
   border-radius: 4px;
   border: 1px dashed ${Colors.grey_25};
-  background-color: ${Colors.white};
+  background-color: ${(props) => props.bgColor || Colors.white};
+  background-image: ${(props) => (props.image ? `url(${props.image})` : 'none')};
+  background-size: contain;
 `;
 
 const TargetGroupSection = styled.div`
