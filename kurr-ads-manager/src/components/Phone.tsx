@@ -179,7 +179,7 @@ const Screen = styled.div<{ image?: string; bgColor?: string }>`
   grid-template-rows: auto 1fr auto;
   width: 250px;
   height: 521px;
-  background-color: ${(props) => props.bgColor || Colors.grey_25};
+  background-color: ${(props) => props.bgColor || Colors.grey_20};
   background-image: ${(props) => (props.image ? `url(${props.image})` : 'none')};
   background-size: cover;
 
