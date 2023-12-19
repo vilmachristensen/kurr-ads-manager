@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { Default } from '../../styles/Text';
 import styled from 'styled-components';
 import Colors from '../../styles/Colors';
-import CheckIcon from '@mui/icons-material/Check';
 
 interface CheckboxButtonProps {
   option1: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  //option2: string;
 }
 
 const CheckboxButton: React.FC<CheckboxButtonProps> = ({ option1, onChange }) => {

@@ -7,7 +7,6 @@ interface RadioButtonProps {
   option1: string;
   option2: string;
   onSelectionChange: (selectedOption: string) => void;
-  //onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({ option1, option2, onSelectionChange }) => {
