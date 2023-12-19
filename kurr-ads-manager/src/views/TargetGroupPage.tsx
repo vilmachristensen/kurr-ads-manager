@@ -1,5 +1,4 @@
 import { CampaignProvider } from '../state/Context';
-import { TargetGroup } from '../types/Types';
 import { useState } from 'react';
 import { useCampaign } from '../state/Context';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,6 @@ import Colors from '../styles/Colors';
 const TargetGroupPage: React.FC = () => {
   const navigate = useNavigate();
   const campaign = useCampaign();
-  console.log('campaing', campaign);
 
   const [formTarget, setFormTarget] = useState({
     id: 1,

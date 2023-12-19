@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Default_medium } from '../styles/Text';
 import Colors from '../styles/Colors';
 import TextField from '@mui/material/TextField';
 

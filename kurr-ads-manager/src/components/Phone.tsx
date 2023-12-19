@@ -232,10 +232,6 @@ const BottomSection = styled.div<{ adType?: string }>`
   gap: 16px;
 `;
 
-{
-  /**   position: relative; top: ${(props) => (props.adType === 'BANNER' ? '55%' : '65%')}; */
-}
-
 const Left = styled.div`
   display: flex;
   flex-direction: column;

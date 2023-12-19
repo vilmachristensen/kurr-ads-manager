@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { CampaignProvider, useCampaign } from '../state/Context';
-import { useNavigate, useNavigation, useParams } from 'react-router-dom';
 import Banner from '../components/Banner';
 import Ingredient from '../components/Ingredient';
 import { Header_small, Header_mini } from '../styles/Text';
@@ -12,8 +10,6 @@ import { useLocation } from 'react-router-dom';
 import Phone from '../components/Phone';
 
 const AdPage: React.FC = () => {
-  const campaign = useCampaign();
-  const navigate = useNavigate();
   const [click, setClick] = useState('');
   const [selectedAd, setSelectedAd] = useState('');
 
@@ -34,10 +30,8 @@ const AdPage: React.FC = () => {
 
 
   const handleClick = () => {
-    // Recept
+    //Relaterade till recept
   };
-
-  console.log("Mottaget id", id)
 
   return (
     <Content>

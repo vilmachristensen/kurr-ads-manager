@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
@@ -38,11 +38,9 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Update activePage whenever the location changes
     setActivePage(location.pathname);
   }, [location]);
 
-  console.log("activePage", activePage)
 
   return (
     <PageContainer>
@@ -50,7 +48,6 @@ const App = () => {
       <ContentWrapper>
         <Layout>
           <div>
-            {/* Pass activePage as a prop to VerticalNavbar */}
             <VerticalNavbar activePage={activePage}/>
           </div>
           <Content>

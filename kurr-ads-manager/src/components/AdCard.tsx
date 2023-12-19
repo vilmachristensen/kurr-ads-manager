@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import BannerImage from '../../src/assets/BannerImage.png';
 import IngredientImage from '../../src/assets/IngredientImage.png';

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import { useCampaign } from '../state/Context';
-import { Banner, Ingredient } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
 import { Header_small, Header_mini, Default, Default_medium } from '../styles/Text';
 import PrimaryButton from '../components/buttons/PrimaryButton';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import Colors from '../styles/Colors';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Phone from '../components/Phone';
@@ -12,19 +11,13 @@ import Phone from '../components/Phone';
 const PreviewPage: React.FC = () => {
   const campaign = useCampaign();
   const navigate = useNavigate();
-  const [targetGroupId, setTargetGroupId] = useState(0);
 
   const handleClick = (type: string) => {
     {
-      /*type === 'Ad' && 
-        navigate('/AdPage', {
-          state: { id: targetGroupId 0 },
-        });*/
 
       {
         campaign.campaign.targetGroups.map((group) => {
           if (group.id !== null) {
-            //setTargetGroupId(group.id);
             type === 'Ad' &&
               navigate('/AdPage', {
                 state: { id: group.id },
@@ -39,7 +32,6 @@ const PreviewPage: React.FC = () => {
     {
       type === 'Confirmation' && navigate('/ConfirmationPage');
     }
-    console.log('Clicked');
   };
 
   return (

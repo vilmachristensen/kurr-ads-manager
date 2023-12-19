@@ -5,7 +5,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Default, Tertiary_text } from '../styles/Text';
 import Colors from '../styles/Colors';
 import styled from 'styled-components';
-import TertiaryButton from './buttons/TertiaryButton';
 
 type MenuItem = {
   item: string;
@@ -18,8 +17,8 @@ interface DropDownProps {
   width: number;
   inHeader: boolean;
   menuItems: MenuItem[];
-  onChange?: (event: SelectChangeEvent) => void; // La till denna för banner komponenten
-  value?: string; // La till denna för banner komponenten
+  onChange?: (event: SelectChangeEvent) => void; 
+  value?: string;
 }
 
 const DropDown: React.FC<DropDownProps> = ({

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { CampaignProvider, useCampaign } from '../state/Context';
-import { Banner, Campaign, Ingredient } from '../types/Types';
 import { useNavigate } from 'react-router-dom';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import RadioButton from '../components/buttons/RadioButton';
@@ -27,8 +26,6 @@ const CampaignPage: React.FC = () => {
     endDate: null,
     targetGroups: [],
   });
-
-  console.log('Campaign: ', campaign);
 
   const handleClick = () => {
     campaign.setCampaign({
