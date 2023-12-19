@@ -141,14 +141,12 @@ const Content = styled.div`
 const Preview = styled.div`
   position: fixed;
   top: 130px; 
-  right: 80px;
-  display: flex;
-  justify-content: flex-end;
+  right: calc(100vw - 90vw);
 }`;
 
 const Grid = styled.div`
   display: grid;  
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 150px 150px 150px;
   gap: 50px;
 }`;
 

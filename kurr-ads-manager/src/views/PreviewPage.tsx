@@ -259,9 +259,7 @@ const PreviewContent = styled.div`
 const Preview = styled.div`
   position: fixed;
   top: 130px; 
-  right: 80px;
-  display: flex;
-  justify-content: flex-end;
+  right: calc(100vw - 90vw);
 }`;
 
 const Section = styled.div`
